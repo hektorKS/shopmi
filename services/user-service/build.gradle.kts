@@ -8,9 +8,11 @@ plugins {
 }
 
 private object Versions {
-  const val springCloudVersion = "Greenwich.SR1"
+  const val springCloud = "Greenwich.SR1"
+  const val hibernateValidator = "6.0.13.Final"
   const val lombok = "1.18.2"
   const val junit = "5.1.0"
+  const val json = "20180130"
 }
 
 repositories {
@@ -21,7 +23,12 @@ repositories {
 dependencies {
 
   implementation("org.springframework.boot:spring-boot-starter-web")
-  implementation("org.springframework.cloud:spring-cloud-starter-consul-all")
+  implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery")
+  implementation("org.springframework.cloud:spring-cloud-starter-consul-config")
+  implementation("org.hibernate:hibernate-validator:${Versions.hibernateValidator}")
+  implementation("org.json:json:${Versions.json}")
+
+  annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
   compileOnly("org.projectlombok:lombok:${Versions.lombok}")
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -34,7 +41,7 @@ configure<JavaPluginConvention> {
 }
 
 dependencyManagement {
-  imports { mavenBom("org.springframework.cloud:spring-cloud-dependencies:${Versions.springCloudVersion}") }
+  imports { mavenBom("org.springframework.cloud:spring-cloud-dependencies:${Versions.springCloud}") }
 }
 
 tasks {
