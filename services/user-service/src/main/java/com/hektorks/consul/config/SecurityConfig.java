@@ -1,4 +1,4 @@
-package com.hektorks.consul.configuration;
+package com.hektorks.consul.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

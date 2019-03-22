@@ -1,4 +1,4 @@
-package com.hektorks.passwordencryption.exceptions;
+package com.hektorks.usercommon.passwordencryption.exceptions;
 
 public class DecryptionFailedException extends RuntimeException {
   public DecryptionFailedException(Exception cause) {

@@ -1,10 +1,10 @@
 package com.hektorks.user.createuser;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Data
@@ -27,6 +27,7 @@ class CreateUserRequest {
   private String email;
 
   @NotBlank(message = "Mandatory field phoneNumber missing.")
+//  TODO This pattern is not valid
   @Pattern(regexp = "^+(?:[0-9]?){6,14}[0-9]$", message = "Phone number format ^+(?:[0-9]?){6,14}[0-9]$.")
   private String phoneNumber;
 

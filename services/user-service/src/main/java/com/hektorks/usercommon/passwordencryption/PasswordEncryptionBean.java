@@ -1,4 +1,4 @@
-package com.hektorks.passwordencryption;
+package com.hektorks.usercommon.passwordencryption;
 
 public interface PasswordEncryptionBean {
   EncryptedPassword encrypt(String password);

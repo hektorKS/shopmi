@@ -1,18 +1,19 @@
-package com.hektorks.passwordencryption;
+package com.hektorks.usercommon.passwordencryption;
 
-import com.hektorks.consul.configuration.SecurityConfig;
+import com.hektorks.consul.config.SecurityConfig;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.security.NoSuchAlgorithmException;
 
-@RunWith(MockitoJUnitRunner.class)
+
+@ExtendWith(MockitoExtension.class)
 class PasswordEncryptionBeanImplTest {
 
   @Mock

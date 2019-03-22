@@ -1,4 +1,4 @@
-package com.hektorks.passwordencryption;
+package com.hektorks.usercommon.passwordencryption;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

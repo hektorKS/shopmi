@@ -9,17 +9,17 @@ services:
     network_mode: "host"
     command: "agent -server -ui -bootstrap-expect=1 -client=127.0.0.1 -bind=127.0.0.1 -data-dir /consul/data"
   mysql:
-    image: mysql:8.0.15
+    image: mysql:8.0.13
     container_name: shopmi-mysql
     restart: always
     environment:
-    - MYSQL_DATABASE=mydb
-    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=users
+    - MYSQL_ROOT_PASSWORD=2cb59d0bcd6a4a96aaf52e368aeacde7 # TODO SHOULD BE SECRET IN THE FUTURE
     - MYSQL_HOST=127.0.0.1
     - MYSQL_PORT=3306
     volumes:
     - shopmi-mysql-data:/var/lib/mysql
-    - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    - ./database/users.sql:/docker-entrypoint-initdb.d/users.sql
     network_mode: "host"
 volumes:
   shopmi-consul-data:

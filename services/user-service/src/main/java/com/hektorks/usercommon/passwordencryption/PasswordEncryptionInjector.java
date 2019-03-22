@@ -1,6 +1,6 @@
-package com.hektorks.passwordencryption;
+package com.hektorks.usercommon.passwordencryption;
 
-import com.hektorks.consul.configuration.SecurityConfig;
+import com.hektorks.consul.config.SecurityConfig;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

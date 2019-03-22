@@ -1,8 +1,8 @@
-package com.hektorks.passwordencryption;
+package com.hektorks.usercommon.passwordencryption;
 
-import com.hektorks.consul.configuration.SecurityConfig;
-import com.hektorks.passwordencryption.exceptions.DecryptionFailedException;
-import com.hektorks.passwordencryption.exceptions.EncryptionFailedException;
+import com.hektorks.consul.config.SecurityConfig;
+import com.hektorks.usercommon.passwordencryption.exceptions.DecryptionFailedException;
+import com.hektorks.usercommon.passwordencryption.exceptions.EncryptionFailedException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
