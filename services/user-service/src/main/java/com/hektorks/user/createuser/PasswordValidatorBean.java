@@ -1,8 +1,7 @@
-package com.hektorks.user.createuser.validation;
+package com.hektorks.user.createuser;
 
 import com.hektorks.exceptionhandling.BusinessValidationException;
-import com.hektorks.user.common.BusinessValidatorBean;
-import com.hektorks.user.createuser.CreateUserRequest;
+import com.hektorks.user.common.validation.BusinessValidatorBean;
 
 class PasswordValidatorBean implements BusinessValidatorBean<CreateUserRequest> {
 

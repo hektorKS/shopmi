@@ -2,7 +2,7 @@ package com.hektorks.user.common.validation;
 
 import com.hektorks.exceptionhandling.BusinessValidationException;
 
-class UsernameValidatorBean implements BusinessValidatorBean<String> {
+class UsernameValidatorBeanImpl implements UsernameValidatorBean {
 
   private static final int USERNAME_MIN_LENGTH = 2;
   private static final int USERNAME_MAX_LENGTH = 32;

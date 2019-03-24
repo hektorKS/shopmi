@@ -2,7 +2,6 @@ package com.hektorks.user.createuser;
 
 import com.hektorks.user.common.passwordencryption.PasswordEncryptionBean;
 import com.hektorks.user.common.repository.UsersRepository;
-import com.hektorks.user.createuser.validation.CreateUserRequestValidatorBean;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

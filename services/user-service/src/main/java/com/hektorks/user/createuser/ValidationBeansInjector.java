@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @AllArgsConstructor
-class ValidatorBeansInjector {
+class ValidationBeansInjector {
 
   private final FirstNameValidatorBean firstNameValidatorBean;
   private final LastNameValidatorBean lastNameValidatorBean;

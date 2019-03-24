@@ -1,7 +1,7 @@
 package com.hektorks.user.createuser;
 
 import com.hektorks.exceptionhandling.BusinessValidationException;
-import com.hektorks.user.common.BusinessValidatorBean;
+import com.hektorks.user.common.validation.BusinessValidatorBean;
 import com.hektorks.user.common.CommandBean;
 import com.hektorks.user.common.User;
 import com.hektorks.user.common.passwordencryption.PasswordEncryptionBean;

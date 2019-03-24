@@ -2,7 +2,7 @@ package com.hektorks.user.common.validation;
 
 import com.hektorks.exceptionhandling.BusinessValidationException;
 
-class LastNameValidatorBean implements FirstNameValidatorBean {
+class LastNameValidatorBeanImpl implements LastNameValidatorBean {
 
   private static final int LAST_NAME_MIN_LENGTH = 2;
   private static final int LAST_NAME_MAX_LENGTH = 32;

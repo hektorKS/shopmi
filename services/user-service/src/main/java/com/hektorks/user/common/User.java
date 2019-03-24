@@ -3,18 +3,20 @@ package com.hektorks.user.common;
 import com.hektorks.user.common.passwordencryption.EncryptedPassword;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
 @ToString
+@NoArgsConstructor
 @AllArgsConstructor
 public class User {
-  private final Integer id;
-  private final String firstName;
-  private final String lastName;
-  private final String username;
-  private final EncryptedPassword encryptedPassword;
-  private final String email;
-  private final String phoneNumber;
-  private final String countryCode;
+  private Integer id;
+  private String firstName;
+  private String lastName;
+  private String username;
+  private EncryptedPassword encryptedPassword;
+  private String email;
+  private String phoneNumber;
+  private String countryCode;
 }

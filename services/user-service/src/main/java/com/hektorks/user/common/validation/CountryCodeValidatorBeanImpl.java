@@ -2,7 +2,7 @@ package com.hektorks.user.common.validation;
 
 import com.hektorks.exceptionhandling.BusinessValidationException;
 
-class CountryCodeValidatorBean implements BusinessValidatorBean<String> {
+class CountryCodeValidatorBeanImpl implements CountryCodeValidatorBean {
 
   private static final int COUNTRY_CODE_LENGTH = 2;
 

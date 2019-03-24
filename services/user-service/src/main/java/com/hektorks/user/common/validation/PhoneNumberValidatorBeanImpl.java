@@ -2,7 +2,7 @@ package com.hektorks.user.common.validation;
 
 import com.hektorks.exceptionhandling.BusinessValidationException;
 
-class PhoneNumberValidatorBean implements LastNameValidatorBean {
+class PhoneNumberValidatorBeanImpl implements PhoneNumberValidatorBean {
 
   private static final String PHONE_NUMBER_PATTERN = "^\\+?(?:[0-9 ]?){6,16}[0-9]$";
 

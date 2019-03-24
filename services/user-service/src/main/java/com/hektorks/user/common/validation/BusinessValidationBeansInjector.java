@@ -1,63 +1,39 @@
-package com.hektorks.user.createuser.validation;
+package com.hektorks.user.common.validation;
 
-import com.hektorks.user.common.validation.CountryCodeValidatorBean;
-import com.hektorks.user.common.validation.EmailValidatorBean;
-import com.hektorks.user.common.validation.FirstNameValidatorBean;
-import com.hektorks.user.common.validation.LastNameValidatorBean;
-import com.hektorks.user.common.validation.PhoneNumberValidatorBean;
-import com.hektorks.user.common.validation.UsernameValidatorBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-class ValidatorBeansInjector {
-
-  @Bean
-  CreateUserRequestValidatorBean getCreateUserRequestValidatorBean() {
-    return new CreateUserRequestValidatorBean(
-        getFirstNameValidatorBean(),
-        getLastNameValidatorBean(),
-        getUsernameValidatorBean(),
-        getPasswordValidatorBean(),
-        getEmailValidatorBean(),
-        getPhoneNumberValidatorBean(),
-        getCountryCodeValidatorBean()
-    );
-  }
+class BusinessValidationBeansInjector {
 
   @Bean
   FirstNameValidatorBean getFirstNameValidatorBean() {
-    return new FirstNameValidatorBean();
+    return new FirstNameValidatorBeanImpl();
   }
 
   @Bean
   LastNameValidatorBean getLastNameValidatorBean() {
-    return new LastNameValidatorBean();
+    return new LastNameValidatorBeanImpl();
   }
 
   @Bean
   UsernameValidatorBean getUsernameValidatorBean() {
-    return new UsernameValidatorBean();
-  }
-
-  @Bean
-  PasswordValidatorBean getPasswordValidatorBean() {
-    return new PasswordValidatorBean();
+    return new UsernameValidatorBeanImpl();
   }
 
   @Bean
   EmailValidatorBean getEmailValidatorBean() {
-    return new EmailValidatorBean();
+    return new EmailValidatorBeanImpl();
   }
 
   @Bean
   PhoneNumberValidatorBean getPhoneNumberValidatorBean() {
-    return new PhoneNumberValidatorBean();
+    return new PhoneNumberValidatorBeanImpl();
   }
 
   @Bean
   CountryCodeValidatorBean getCountryCodeValidatorBean() {
-    return new CountryCodeValidatorBean();
+    return new CountryCodeValidatorBeanImpl();
   }
 
 }

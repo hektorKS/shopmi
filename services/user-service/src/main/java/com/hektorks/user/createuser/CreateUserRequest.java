@@ -2,20 +2,20 @@ package com.hektorks.user.createuser;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
-public class CreateUserRequest {
+class CreateUserRequest {
 
-  @NotBlank(message = "Mandatory field firstName missing.")
+  @NotNull(message = "Mandatory field firstName missing.")
   private String firstName;
-  @NotBlank(message = "Mandatory field lastName missing.")
+  @NotNull(message = "Mandatory field lastName missing.")
   private String lastName;
-  @NotBlank(message = "Mandatory field username missing.")
+  @NotNull(message = "Mandatory field username missing.")
   private String username;
-  @NotBlank(message = "Mandatory field password missing.")
+  @NotNull(message = "Mandatory field password missing.")
   private String password;
-  @NotBlank(message = "Mandatory field email missing.")
+  @NotNull(message = "Mandatory field email missing.")
   private String email;
   private String phoneNumber;
   private String countryCode;
