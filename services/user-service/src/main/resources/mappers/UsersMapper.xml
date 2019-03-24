@@ -35,6 +35,12 @@
         WHERE USERNAME = #{username}
     </select>
 
+    <select id="countByEmail" parameterType="String" resultType="Integer">
+        SELECT COUNT(*)
+        FROM USERS
+        WHERE EMAIL = #{email}
+    </select>
+
     <select id="selectUserById" parameterType="Integer" resultMap="UserResultMap">
         SELECT *
         FROM USERS

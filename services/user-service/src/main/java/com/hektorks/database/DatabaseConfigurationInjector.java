@@ -21,6 +21,8 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 @MapperScan("com.hektorks.user.common.repository.mappers")
 class DatabaseConfigurationInjector {
+  private static final String MYBATIS_CONFIG_FILE_NAME = "mybatis-config.xml";
+
   private final DatabaseConfig databaseConfig;
 
   @Bean
@@ -38,7 +40,7 @@ class DatabaseConfigurationInjector {
   SqlSessionFactory getSqlSessionFactory() throws Exception {
     SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
     sqlSessionFactoryBean.setDataSource(getDataSource());
-    sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
+    sqlSessionFactoryBean.setConfigLocation(new ClassPathResource(MYBATIS_CONFIG_FILE_NAME));
     return sqlSessionFactoryBean.getObject();
   }
 

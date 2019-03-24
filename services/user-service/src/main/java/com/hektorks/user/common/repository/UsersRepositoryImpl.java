@@ -31,10 +31,20 @@ class UsersRepositoryImpl implements UsersRepository {
   public boolean userExistsByUsername(String username) {
     try {
       UsersMapper usersMapper = sqlSessionTemplate.getMapper(UsersMapper.class);
-      int result =  usersMapper.countByUsername(username);
-      return result > 0;
+      return usersMapper.countByUsername(username) > 0;
     } catch (Exception exception) {
       log.warn("Checking if user with username [{}] exists failed.", username, exception);
+      throw new RepositoryException(exception);
+    }
+  }
+
+  @Override
+  public boolean userExistsByEmail(String email) {
+    try {
+      UsersMapper usersMapper = sqlSessionTemplate.getMapper(UsersMapper.class);
+      return usersMapper.countByEmail(email) > 0;
+    } catch (Exception exception) {
+      log.warn("Checking if user with email [{}] exists failed.", email, exception);
       throw new RepositoryException(exception);
     }
   }

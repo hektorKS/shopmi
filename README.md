@@ -12,6 +12,3 @@ docker-compose up -d
 ```bash
 ./gradlew clean bootJar
 ```
-
-
-

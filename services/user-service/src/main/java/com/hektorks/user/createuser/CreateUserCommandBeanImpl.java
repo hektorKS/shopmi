@@ -1,12 +1,13 @@
 package com.hektorks.user.createuser;
 
 import com.hektorks.exceptionhandling.BusinessValidationException;
-import com.hektorks.user.common.validation.BusinessValidatorBean;
 import com.hektorks.user.common.CommandBean;
 import com.hektorks.user.common.User;
 import com.hektorks.user.common.passwordencryption.PasswordEncryptionBean;
 import com.hektorks.user.common.repository.UsersRepository;
+import com.hektorks.user.common.validation.BusinessValidatorBean;
 import com.hektorks.user.createuser.exceptions.CreateUserCommandException;
+import com.hektorks.user.createuser.exceptions.EmailAlreadyUsedException;
 import com.hektorks.user.createuser.exceptions.UserExistsException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,11 @@ class CreateUserCommandBeanImpl implements CommandBean<Integer, CreateUserReques
       if (usersRepository.userExistsByUsername(createUserRequest.getUsername())) {
         log.info("User with username [{}] already exists.", createUserRequest.getUsername());
         throw new UserExistsException(createUserRequest.getUsername());
+      }
+
+      if (usersRepository.userExistsByEmail(createUserRequest.getEmail())) {
+        log.info("Email {} is already used", createUserRequest.getEmail());
+        throw new EmailAlreadyUsedException(createUserRequest.getEmail());
       }
 
       User user = new User(

@@ -11,4 +11,6 @@ public interface UsersMapper {
   User selectUserById(Integer id);
 
   int countByUsername(String username);
+
+  int countByEmail(String email);
 }
