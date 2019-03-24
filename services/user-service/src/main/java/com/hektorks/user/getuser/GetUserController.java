@@ -1,8 +1,11 @@
 package com.hektorks.user.getuser;
 
-import com.hektorks.usercommon.repository.UsersRepository;
-import com.hektorks.usercommon.datamodel.User;
+import com.hektorks.exceptionhandling.CommandException;
+import com.hektorks.user.common.CommandBean;
+import com.hektorks.user.common.User;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +17,22 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class GetUserController {
 
-  private final UsersRepository usersRepository;
+  @Qualifier("GetUserByIdCommandBeanImpl")
+  private final CommandBean<User, Integer> commandBean;
 
   @GetMapping("/user/{userId}")
-  ResponseEntity<User> getUser(@PathVariable Integer userId) {
-//    TODO this must be refactored to map response without password
-    return ResponseEntity.ok(usersRepository.getUserById(userId));
+  ResponseEntity getUser(@PathVariable Integer userId) {
+
+    try {
+      User user = commandBean.execute(userId);
+      if (user == null) {
+        return ResponseEntity.notFound().build();
+      }
+      return ResponseEntity.ok(GetUserResponse.create(user));
+    } catch (
+        CommandException exception) {
+      return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
 }

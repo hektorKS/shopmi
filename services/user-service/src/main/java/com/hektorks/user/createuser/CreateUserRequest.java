@@ -1,37 +1,51 @@
 package com.hektorks.user.createuser;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 @Data
-class CreateUserRequest {
+public class CreateUserRequest {
 
   @NotBlank(message = "Mandatory field firstName missing.")
   private String firstName;
-
   @NotBlank(message = "Mandatory field lastName missing.")
   private String lastName;
-
   @NotBlank(message = "Mandatory field username missing.")
   private String username;
-
   @NotBlank(message = "Mandatory field password missing.")
   private String password;
-
-  @Email(message = "Invalid email format.")
   @NotBlank(message = "Mandatory field email missing.")
   private String email;
-
-  @NotBlank(message = "Mandatory field phoneNumber missing.")
-//  TODO This pattern is not valid
-  @Pattern(regexp = "^+(?:[0-9]?){6,14}[0-9]$", message = "Phone number format ^+(?:[0-9]?){6,14}[0-9]$.")
   private String phoneNumber;
-
-  @Length(min = 2, max = 2, message = "Country code must be in ISO 3166-1 alpha-2 format.")
-  @NotBlank(message = "Mandatory field countryCode missing.")
   private String countryCode;
+
+  @Override
+  public String toString() {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder
+        .append("CreateUserRequest(")
+        .append("firstName = ")
+        .append(firstName)
+        .append(", ")
+        .append("lastName = ")
+        .append(lastName)
+        .append(", ")
+        .append("username = ")
+        .append(username)
+        .append(", ")
+        .append("password = ")
+        .append("XXX")
+        .append(", ")
+        .append("email = ")
+        .append(email)
+        .append(", ")
+        .append("phoneNumber = ")
+        .append(phoneNumber != null ? phoneNumber.replaceAll("\\d", "X") : null)
+        .append(", ")
+        .append("countryCode = ")
+        .append(countryCode)
+        .append(")");
+    return stringBuilder.toString();
+  }
 }

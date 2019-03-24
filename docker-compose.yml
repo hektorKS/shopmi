@@ -13,8 +13,8 @@ services:
     container_name: shopmi-mysql
     restart: always
     environment:
-    - MYSQL_DATABASE=users
-    - MYSQL_ROOT_PASSWORD=2cb59d0bcd6a4a96aaf52e368aeacde7 # TODO SHOULD BE SECRET IN THE FUTURE
+    - MYSQL_DATABASE=shopmi
+    - MYSQL_ROOT_PASSWORD=2cb59d0bcd6a4a96aaf52e368aeacde7 # TODO SHOULD NOT BE HARDCODED LIKE THIS
     - MYSQL_HOST=127.0.0.1
     - MYSQL_PORT=3306
     volumes:

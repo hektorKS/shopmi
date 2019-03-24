@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hektorks.usercommon.repository.mappers.UsersMapper">
-    <resultMap id="UserResult" type="User">
+<mapper namespace="com.hektorks.user.common.repository.mappers.UsersMapper">
+    <resultMap id="UserResultMap" type="User">
         <result property="id" column="ID"/>
         <result property="firstName" column="FIRST_NAME"/>
         <result property="lastName" column="LAST_NAME"/>
         <result property="username" column="USERNAME"/>
-        <result property="password" column="PASSWORD"/>
-        <result property="salt" column="SALT"/>
+        <result property="encryptedPassword.password" column="PASSWORD"/>
+        <result property="encryptedPassword.salt" column="SALT"/>
         <result property="email" column="EMAIL"/>
         <result property="phoneNumber" column="PHONE_NUMBER"/>
         <result property="countryCode" column="COUNTRY_CODE"/>
     </resultMap>
 
-    <select id="selectUserById" parameterType="Integer" resultType="User">
+    <insert id="createUser" parameterType="User" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+        INSERT INTO USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, SALT, EMAIL, PHONE_NUMBER, COUNTRY_CODE)
+        VALUES (#{firstName},
+                #{lastName},
+                #{username},
+                #{encryptedPassword.password},
+                #{encryptedPassword.salt},
+                #{email},
+                #{phoneNumber},
+                #{countryCode})
+    </insert>
+
+    <select id="countByUsername" parameterType="String" resultType="Integer">
+        SELECT COUNT(*)
+        FROM USERS
+        WHERE USERNAME = #{username}
+    </select>
+
+    <select id="selectUserById" parameterType="Integer" resultMap="UserResultMap">
         SELECT *
         FROM USERS
         WHERE ID = #{id}
     </select>
-
-    <insert id="createUser" parameterType="User" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
-        INSERT INTO USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, SALT, EMAIL, PHONE_NUMBER, COUNTRY_CODE)
-        VALUES (#{firstName}, #{lastName}, #{username}, #{password}, #{salt}, #{email}, #{phoneNumber}, #{countryCode})
-    </insert>
 </mapper>

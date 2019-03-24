@@ -1,7 +1,8 @@
 package com.hektorks.user.createuser;
 
-import com.hektorks.usercommon.repository.UsersRepository;
-import com.hektorks.usercommon.passwordencryption.PasswordEncryptionBean;
+import com.hektorks.user.common.passwordencryption.PasswordEncryptionBean;
+import com.hektorks.user.common.repository.UsersRepository;
+import com.hektorks.user.createuser.validation.CreateUserRequestValidatorBean;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,10 +12,15 @@ import org.springframework.context.annotation.Configuration;
 class CreateUserCommandBeanInjector {
 
   private final PasswordEncryptionBean passwordEncryptionBean;
+  private final CreateUserRequestValidatorBean createUserRequestValidatorBean;
   private final UsersRepository usersRepository;
 
-  @Bean(name = "CreateUserCommandBean")
-  CreateUserCommandBean getCreateUserCommandBean() {
-    return new CreateUserCommandBean(usersRepository, passwordEncryptionBean);
+  @Bean(name = "CreateUserCommandBeanImpl")
+  CreateUserCommandBeanImpl getCreateUserCommandBeanImpl() {
+    return new CreateUserCommandBeanImpl(
+        passwordEncryptionBean,
+        createUserRequestValidatorBean,
+        usersRepository
+    );
   }
 }

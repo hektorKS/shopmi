@@ -2,10 +2,10 @@
   "user-service": {
     "database": {
       "driver": "com.mysql.cj.jdbc.Driver",
-      "url": "jdbc:mysql://127.0.0.1:3306/users",
+      "url": "jdbc:mysql://127.0.0.1:3306/shopmi",
       "username": "root",
       "password": "2cb59d0bcd6a4a96aaf52e368aeacde7",
-      "maximumPoolSize": 200
+      "maximumPoolSize": 50
     },
     "security": {
       "encryptionSecret": "41f89484fcda4585b8456437d6d54209"

@@ -1,10 +1,10 @@
 package com.hektorks.user.createuser;
 
+import com.hektorks.exceptionhandling.BusinessValidationException;
 import com.hektorks.exceptionhandling.CommandException;
-import com.hektorks.exceptionhandling.LogicValidationException;
-import com.hektorks.exceptionhandling.LogicValidationExceptionMapper;
-import com.hektorks.exceptionhandling.RequestValidationExceptions;
-import com.hektorks.usercommon.CommandBean;
+import com.hektorks.exceptionhandling.BusinessValidationExceptionMapper;
+import com.hektorks.exceptionhandling.RequestValidationErrors;
+import com.hektorks.user.common.CommandBean;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -23,21 +23,21 @@ import javax.validation.Valid;
 @AllArgsConstructor
 class CreateUserController {
 
-  @Qualifier("CreateUserCommandBean")
-  private final CommandBean<CreateUserRequest, Integer> commandBean;
+  @Qualifier("CreateUserCommandBeanImpl")
+  private final CommandBean<Integer, CreateUserRequest> commandBean;
 
   @PostMapping("/user")
   public ResponseEntity createUser(@Valid @RequestBody CreateUserRequest createUserRequest, Errors errors) {
     if (errors.hasErrors()) {
-      return ResponseEntity.badRequest().body(RequestValidationExceptions.fromContextErrors(errors));
+      return ResponseEntity.badRequest().body(RequestValidationErrors.fromContextErrors(errors));
     }
     try {
       CreateUserResponse createUserResponse = new CreateUserResponse(commandBean.execute(createUserRequest));
       return ResponseEntity.ok(createUserResponse);
-    } catch (LogicValidationException exception) {
-      return ResponseEntity.unprocessableEntity().body(LogicValidationExceptionMapper.toJson(exception));
+    } catch (BusinessValidationException exception) {
+      return ResponseEntity.unprocessableEntity().body(BusinessValidationExceptionMapper.toMap(exception));
     } catch (CommandException exception) {
-      return new ResponseEntity<>(exception.getCause(), HttpStatus.INTERNAL_SERVER_ERROR);
+      return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 }

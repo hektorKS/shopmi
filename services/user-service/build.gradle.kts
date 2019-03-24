@@ -10,7 +10,6 @@ plugins {
 private object Versions {
   const val springBoot = "2.1.3.RELEASE"
   const val springBootConfigurationProcessor = "2.1.3.RELEASE"
-  const val json = "20180130"
   const val springCloudDependencies = "Greenwich.SR1"
 
   const val hikariCP = "3.3.1"
@@ -33,7 +32,6 @@ repositories {
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web:${Versions.springBoot}")
-  implementation("org.json:json:${Versions.json}")
 
   implementation("com.zaxxer:HikariCP:${Versions.hikariCP}")
   implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:${Versions.myBatis}")
