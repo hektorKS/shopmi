@@ -6,6 +6,8 @@ public interface UsersRepository {
 
   Integer createUser(User user);
 
+  void updateUserById(Integer id);
+
   User getUserById(Integer id);
 
   boolean userExistsById(Integer id);
