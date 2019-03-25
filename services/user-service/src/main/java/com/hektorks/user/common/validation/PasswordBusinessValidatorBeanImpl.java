@@ -1,9 +1,8 @@
-package com.hektorks.user.createuser;
+package com.hektorks.user.common.validation;
 
 import com.hektorks.exceptionhandling.BusinessValidationException;
-import com.hektorks.user.common.validation.BusinessValidatorBean;
 
-class PasswordValidatorBean implements BusinessValidatorBean<CreateUserRequest> {
+class PasswordBusinessValidatorBeanImpl implements PasswordBusinessValidatorBean {
 
   private static final int PASSWORD_MIN_LENGTH = 8;
   private static final int PASSWORD_MAX_LENGTH = 32;
@@ -11,16 +10,17 @@ class PasswordValidatorBean implements BusinessValidatorBean<CreateUserRequest> 
       .format("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{%d,%d}$", PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH);
 
   @Override
-  public void validate(CreateUserRequest request) {
-    boolean isValid = isValidPattern(request.getPassword());
+  public void validate(PasswordValidationEntity entity) {
+    boolean isValid = isValidPattern(entity.getPassword());
 
     if (isValid) {
       isValid = isValidWithFields(
-          request.getPassword(),
-          request.getFirstName(),
-          request.getLastName(),
-          request.getUsername(),
-          request.getEmail()
+          entity.getPassword(),
+          entity.getFirstName(),
+          entity.getLastName(),
+          entity.getUsername(),
+          entity.getEmail(),
+          entity.getPhoneNumber()
       );
     }
 
@@ -41,12 +41,30 @@ class PasswordValidatorBean implements BusinessValidatorBean<CreateUserRequest> 
     }
   }
 
+  @Override
+  public boolean isApplicable(PasswordValidationEntity entity) {
+    if (entity != null) {
+      return entity.getPassword() != null &&
+          entity.getFirstName() != null &&
+          entity.getLastName() != null &&
+          entity.getEmail() != null &&
+          entity.getUsername() != null;
+    }
+    return false;
+  }
+
   private boolean isValidPattern(String password) {
     return password.matches(PASSWORD_PATTERN);
   }
 
-
-  private boolean isValidWithFields(String password, String firstName, String lastName, String username, String email) {
+  private boolean isValidWithFields(
+      String password,
+      String firstName,
+      String lastName,
+      String username,
+      String email,
+      String phoneNumber
+  ) {
     String lowercasePassword = password.toLowerCase();
     String lowercaseUsername = username.toLowerCase();
     boolean isValid = isValidWithUsername(lowercasePassword, lowercaseUsername);
@@ -66,6 +84,10 @@ class PasswordValidatorBean implements BusinessValidatorBean<CreateUserRequest> 
       isValid = isValidWithEmail(lowercasePassword, lowercaseEmail);
     }
 
+    if (isValid) {
+      isValid = isValidWithPhoneNumber(lowercasePassword, phoneNumber);
+    }
+
     return isValid;
   }
 
@@ -83,6 +105,10 @@ class PasswordValidatorBean implements BusinessValidatorBean<CreateUserRequest> 
 
   private boolean isValidWithEmail(String password, String email) {
     return !password.contains(email);
+  }
+
+  private boolean isValidWithPhoneNumber(String password, String phoneNumber) {
+    return !password.contains(phoneNumber);
   }
 
 }

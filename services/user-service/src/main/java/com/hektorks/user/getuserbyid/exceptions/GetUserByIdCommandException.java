@@ -1,4 +1,4 @@
-package com.hektorks.user.getuser.exceptions;
+package com.hektorks.user.getuserbyid.exceptions;
 
 import com.hektorks.exceptionhandling.CommandException;
 

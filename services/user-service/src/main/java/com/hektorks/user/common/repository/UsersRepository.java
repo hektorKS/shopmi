@@ -8,6 +8,8 @@ public interface UsersRepository {
 
   User getUserById(Integer id);
 
+  boolean userExistsById(Integer id);
+
   boolean userExistsByUsername(String username);
 
   boolean userExistsByEmail(String email);

@@ -14,8 +14,8 @@ class CreateUserCommandBeanInjector {
   private final CreateUserRequestValidatorBean createUserRequestValidatorBean;
   private final UsersRepository usersRepository;
 
-  @Bean(name = "CreateUserCommandBeanImpl")
-  CreateUserCommandBeanImpl getCreateUserCommandBeanImpl() {
+  @Bean
+  CreateUserCommandBean getCreateUserCommandBeanImpl() {
     return new CreateUserCommandBeanImpl(
         passwordEncryptionBean,
         createUserRequestValidatorBean,

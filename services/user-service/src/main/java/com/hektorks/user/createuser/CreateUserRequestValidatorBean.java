@@ -1,39 +1,62 @@
 package com.hektorks.user.createuser;
 
 import com.hektorks.user.common.validation.BusinessValidatorBean;
-import com.hektorks.user.common.validation.CountryCodeValidatorBean;
-import com.hektorks.user.common.validation.EmailValidatorBean;
-import com.hektorks.user.common.validation.FirstNameValidatorBean;
-import com.hektorks.user.common.validation.LastNameValidatorBean;
-import com.hektorks.user.common.validation.PhoneNumberValidatorBean;
-import com.hektorks.user.common.validation.UsernameValidatorBean;
+import com.hektorks.user.common.validation.CountryCodeBusinessValidatorBean;
+import com.hektorks.user.common.validation.EmailBusinessValidatorBean;
+import com.hektorks.user.common.validation.FirstNameBusinessValidatorBean;
+import com.hektorks.user.common.validation.LastNameBusinessValidatorBean;
+import com.hektorks.user.common.validation.PasswordValidationEntity;
+import com.hektorks.user.common.validation.PasswordBusinessValidatorBean;
+import com.hektorks.user.common.validation.PhoneNumberBusinessValidatorBean;
+import com.hektorks.user.common.validation.UsernameBusinessValidatorBean;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @AllArgsConstructor
 class CreateUserRequestValidatorBean implements BusinessValidatorBean<CreateUserRequest> {
 
-  private final FirstNameValidatorBean firstNameValidatorBean;
-  private final LastNameValidatorBean lastNameValidatorBean;
-  private final UsernameValidatorBean usernameValidatorBean;
-  private final PasswordValidatorBean passwordValidatorBean;
-  private final EmailValidatorBean emailValidatorBean;
-  private final PhoneNumberValidatorBean phoneNumberValidatorBean;
-  private final CountryCodeValidatorBean countryCodeValidatorBean;
+  private final FirstNameBusinessValidatorBean firstNameValidatorBean;
+  private final LastNameBusinessValidatorBean lastNameValidatorBean;
+  private final UsernameBusinessValidatorBean usernameValidatorBean;
+  private final PasswordBusinessValidatorBean passwordValidatorBean;
+  private final EmailBusinessValidatorBean emailValidatorBean;
+  private final PhoneNumberBusinessValidatorBean phoneNumberValidatorBean;
+  private final CountryCodeBusinessValidatorBean countryCodeValidatorBean;
 
   @Override
   public void validate(CreateUserRequest createUserRequest) {
+    firstNameValidatorBean.isApplicable(createUserRequest.getUsername());
     firstNameValidatorBean.validate(createUserRequest.getFirstName());
     lastNameValidatorBean.validate(createUserRequest.getLastName());
     usernameValidatorBean.validate(createUserRequest.getUsername());
-    passwordValidatorBean.validate(createUserRequest);
     emailValidatorBean.validate(createUserRequest.getEmail());
-    if (createUserRequest.getPhoneNumber() != null) {
-      phoneNumberValidatorBean.validate(createUserRequest.getPhoneNumber());
+    validatePassword(createUserRequest);
+    validatePhoneNumber(createUserRequest.getPhoneNumber());
+    validateCountryCode(createUserRequest.getCountryCode());
+  }
+
+  private void validatePassword(CreateUserRequest createUserRequest) {
+    PasswordValidationEntity passwordValidationEntity = new PasswordValidationEntity(
+        createUserRequest.getPassword(),
+        createUserRequest.getFirstName(),
+        createUserRequest.getLastName(),
+        createUserRequest.getUsername(),
+        createUserRequest.getEmail(),
+        createUserRequest.getPhoneNumber()
+    );
+    if (passwordValidatorBean.isApplicable(passwordValidationEntity)) {
+      passwordValidatorBean.validate(passwordValidationEntity);
     }
-    if (createUserRequest.getCountryCode() != null) {
-      countryCodeValidatorBean.validate(createUserRequest.getCountryCode());
+  }
+
+  private void validatePhoneNumber(String phoneNumber) {
+    if (phoneNumberValidatorBean.isApplicable(phoneNumber)) {
+      phoneNumberValidatorBean.validate(phoneNumber);
+    }
+  }
+
+  private void validateCountryCode(String countryCode) {
+    if (countryCodeValidatorBean.isApplicable(countryCode)) {
+      countryCodeValidatorBean.validate(countryCode);
     }
   }
 }

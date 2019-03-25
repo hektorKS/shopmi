@@ -1,7 +1,6 @@
 package com.hektorks.user.createuser;
 
 import com.hektorks.exceptionhandling.BusinessValidationException;
-import com.hektorks.user.common.CommandBean;
 import com.hektorks.user.common.User;
 import com.hektorks.user.common.passwordencryption.PasswordEncryptionBean;
 import com.hektorks.user.common.repository.UsersRepository;
@@ -14,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @AllArgsConstructor
-class CreateUserCommandBeanImpl implements CommandBean<Integer, CreateUserRequest> {
+class CreateUserCommandBeanImpl implements CreateUserCommandBean {
 
   private final PasswordEncryptionBean passwordEncryptionBean;
   private final BusinessValidatorBean<CreateUserRequest> businessValidatorBean;
@@ -49,7 +48,7 @@ class CreateUserCommandBeanImpl implements CommandBean<Integer, CreateUserReques
       log.info("User created with id [{}].", userId);
       return userId;
     } catch (BusinessValidationException exception) {
-      log.info("Logic validation failed for create user request [{}].", createUserRequest);
+      log.info("Business validation failed for create user request [{}].", createUserRequest);
       throw exception;
     } catch (Exception exception) {
       throw new CreateUserCommandException(exception);

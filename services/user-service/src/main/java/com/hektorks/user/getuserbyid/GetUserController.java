@@ -1,10 +1,9 @@
-package com.hektorks.user.getuser;
+package com.hektorks.user.getuserbyid;
 
 import com.hektorks.exceptionhandling.CommandException;
-import com.hektorks.user.common.CommandBean;
+import com.hektorks.exceptionhandling.ResourceNotFoundException;
 import com.hektorks.user.common.User;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,22 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/v1")
 @AllArgsConstructor
-public class GetUserController {
+class GetUserController {
 
-  @Qualifier("GetUserByIdCommandBeanImpl")
-  private final CommandBean<User, Integer> commandBean;
+  private final GetUserByIdCommandBean getUserByIdCommandBean;
 
   @GetMapping("/user/{userId}")
   ResponseEntity getUser(@PathVariable Integer userId) {
-
     try {
-      User user = commandBean.execute(userId);
-      if (user == null) {
-        return ResponseEntity.notFound().build();
-      }
+      User user = getUserByIdCommandBean.execute(userId);
       return ResponseEntity.ok(GetUserResponse.create(user));
-    } catch (
-        CommandException exception) {
+    } catch (ResourceNotFoundException exception) {
+      return ResponseEntity.notFound().build();
+    } catch (CommandException exception) {
       return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }

@@ -1,4 +1,4 @@
-package com.hektorks.user.getuser;
+package com.hektorks.user.getuserbyid;
 
 import com.hektorks.user.common.User;
 import lombok.AccessLevel;
@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class GetUserResponse {
+class GetUserResponse {
   private final Integer id;
   private final String firstName;
   private final String lastName;
@@ -16,7 +16,7 @@ public class GetUserResponse {
   private final String phoneNumber;
   private final String countryCode;
 
-  public static GetUserResponse create(User user) {
+  static GetUserResponse create(User user) {
     return new GetUserResponse(
         user.getId(),
         user.getFirstName(),

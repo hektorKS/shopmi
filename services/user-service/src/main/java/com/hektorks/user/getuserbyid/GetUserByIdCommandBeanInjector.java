@@ -1,4 +1,4 @@
-package com.hektorks.user.getuser;
+package com.hektorks.user.getuserbyid;
 
 import com.hektorks.user.common.repository.UsersRepository;
 import lombok.AllArgsConstructor;
@@ -7,12 +7,12 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @AllArgsConstructor
-public class GetUserByIdCommandBeanInjector {
+class GetUserByIdCommandBeanInjector {
 
   private final UsersRepository usersRepository;
 
-  @Bean(name = "GetUserByIdCommandBeanImpl")
-  GetUserByIdCommandBeanImpl getGetUserByIdCommandBeanImpl() {
+  @Bean
+  GetUserByIdCommandBean getGetUserByIdCommandBeanImpl() {
     return new GetUserByIdCommandBeanImpl(usersRepository);
   }
 }

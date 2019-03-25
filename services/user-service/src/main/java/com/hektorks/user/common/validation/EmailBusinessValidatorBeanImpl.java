@@ -2,7 +2,7 @@ package com.hektorks.user.common.validation;
 
 import com.hektorks.exceptionhandling.BusinessValidationException;
 
-class EmailValidatorBeanImpl implements EmailValidatorBean {
+class EmailBusinessValidatorBeanImpl implements EmailBusinessValidatorBean {
 
   private static final String EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
 
@@ -20,8 +20,12 @@ class EmailValidatorBeanImpl implements EmailValidatorBean {
     }
   }
 
+  @Override
+  public boolean isApplicable(String email) {
+    return email != null;
+  }
+
   private boolean isValidPattern(String email) {
     return email.matches(EMAIL_PATTERN);
   }
-
 }
