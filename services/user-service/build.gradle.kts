@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2019 Konrad Szymański. All rights reserved.
+ *
+ */
+
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {

@@ -1,12 +1,15 @@
+/*
+ * Copyright (c) 2019 Konrad Szymański. All rights reserved.
+ *
+ */
+
 package com.hektorks.user.createuser;
 
 import com.hektorks.exceptionhandling.BusinessValidationException;
-import com.hektorks.exceptionhandling.CommandException;
 import com.hektorks.exceptionhandling.BusinessValidationExceptionMapper;
+import com.hektorks.exceptionhandling.CommandException;
 import com.hektorks.exceptionhandling.RequestValidationErrors;
-import com.hektorks.user.common.CommandBean;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -23,8 +26,7 @@ import javax.validation.Valid;
 @AllArgsConstructor
 class CreateUserController {
 
-  @Qualifier("CreateUserCommandBeanImpl")
-  private final CommandBean<Integer, CreateUserRequest> commandBean;
+  private final CreateUserCommandBean createUserCommandBean;
 
   @PostMapping("/user")
   public ResponseEntity createUser(@Valid @RequestBody CreateUserRequest createUserRequest, Errors errors) {
@@ -32,7 +34,7 @@ class CreateUserController {
       return ResponseEntity.badRequest().body(RequestValidationErrors.fromContextErrors(errors));
     }
     try {
-      CreateUserResponse createUserResponse = new CreateUserResponse(commandBean.execute(createUserRequest));
+      CreateUserResponse createUserResponse = new CreateUserResponse(createUserCommandBean.execute(createUserRequest));
       return ResponseEntity.ok(createUserResponse);
     } catch (BusinessValidationException exception) {
       return ResponseEntity.unprocessableEntity().body(BusinessValidationExceptionMapper.toMap(exception));

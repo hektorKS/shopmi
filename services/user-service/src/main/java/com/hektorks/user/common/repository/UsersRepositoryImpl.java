@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2019 Konrad Szymański. All rights reserved.
+ *
+ */
+
 package com.hektorks.user.common.repository;
 
 import com.hektorks.exceptionhandling.RepositoryException;
@@ -28,6 +33,39 @@ class UsersRepositoryImpl implements UsersRepository {
   }
 
   @Override
+  public void updateUser(User user) {
+    try {
+      UsersMapper usersMapper = sqlSessionTemplate.getMapper(UsersMapper.class);
+      usersMapper.updateUser(user);
+    } catch (Exception exception) {
+      log.warn("Updating user failed [{}].", user, exception);
+      throw new RepositoryException(exception);
+    }
+  }
+
+  @Override
+  public User getUserById(Integer id) {
+    try {
+      UsersMapper usersMapper = sqlSessionTemplate.getMapper(UsersMapper.class);
+      return usersMapper.selectUserById(id);
+    } catch (Exception exception) {
+      log.warn("Getting user by id [{}] failed.", id, exception);
+      throw new RepositoryException(exception);
+    }
+  }
+
+  @Override
+  public boolean userExistsById(Integer id) {
+    try {
+      UsersMapper usersMapper = sqlSessionTemplate.getMapper(UsersMapper.class);
+      return usersMapper.countById(id) > 0;
+    } catch (Exception exception) {
+      log.warn("Checking if user exists by id [{}] failed.", id, exception);
+      throw new RepositoryException(exception);
+    }
+  }
+
+  @Override
   public boolean userExistsByUsername(String username) {
     try {
       UsersMapper usersMapper = sqlSessionTemplate.getMapper(UsersMapper.class);
@@ -48,16 +86,4 @@ class UsersRepositoryImpl implements UsersRepository {
       throw new RepositoryException(exception);
     }
   }
-
-  @Override
-  public User getUserById(Integer id) {
-    try {
-      UsersMapper usersMapper = sqlSessionTemplate.getMapper(UsersMapper.class);
-      return usersMapper.selectUserById(id);
-    } catch (Exception exception) {
-      log.warn("Getting user by id [{}] failed.", id, exception);
-      throw new RepositoryException(exception);
-    }
-  }
-
 }
