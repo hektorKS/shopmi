@@ -26,16 +26,10 @@ class PasswordBusinessValidatorBeanImpl implements PasswordBusinessValidatorBean
 
     if (!isValid) {
       throw new BusinessValidationException(
-          new StringBuilder()
-              .append("Password must be from ")
-              .append(PASSWORD_MIN_LENGTH)
-              .append(" to ")
-              .append(PASSWORD_MAX_LENGTH)
-              .append(" signs long.")
-              .append("It cannot contain white signs.")
-              .append("It cannot contain any of username, firstName, lastName, email.")
-              .append("It must contain at least one lowercase letter, uppercase letter and digit.")
-              .toString(),
+          "Password must be from " + PASSWORD_MIN_LENGTH + " to " + PASSWORD_MAX_LENGTH + " signs long."
+              + "It cannot contain white signs."
+              + "It cannot contain any of username, firstName, lastName, email."
+              + "It must contain at least one lowercase letter, uppercase letter and digit.",
           "password"
       );
     }

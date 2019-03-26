@@ -1,6 +1,7 @@
 package com.hektorks.user.updateuser;
 
 import com.hektorks.exceptionhandling.ResourceNotFoundException;
+import com.hektorks.user.common.User;
 import com.hektorks.user.common.repository.UsersRepository;
 import com.hektorks.user.updateuser.exceptions.UpdateUserCommandException;
 import com.hektorks.user.userexists.UserExistsCommandBean;
@@ -27,14 +28,22 @@ class UpdateUserByIdCommandBeanImpl implements UpdateUserByIdCommandBean {
         return null;
       }
 
-//      TODO USER REPOSITORY HERE
-    } catch(ResourceNotFoundException exception){
-      log.info("");//TODO
+      usersRepository.updateUser(new User(
+          updateUserRequest.getId(),
+          updateUserRequest.getFirstName(),
+          updateUserRequest.getLastName(),
+          updateUserRequest.getUsername(),
+          null,
+          updateUserRequest.getEmail(),
+          updateUserRequest.getPhoneNumber(),
+          updateUserRequest.getCountryCode()
+      ));
+    } catch (ResourceNotFoundException exception) {
+      log.info("User with id [{}] not found.", updateUserRequest.getId());
+      throw exception;
     } catch (Exception exception) {
       throw new UpdateUserCommandException(exception);
     }
-
-
     return null;
   }
 }

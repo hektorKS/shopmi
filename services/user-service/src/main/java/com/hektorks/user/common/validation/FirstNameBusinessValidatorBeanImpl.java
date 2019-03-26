@@ -11,13 +11,7 @@ class FirstNameBusinessValidatorBeanImpl implements FirstNameBusinessValidatorBe
   public void validate(String firstName) {
     if (!isFirstNameValid(firstName)) {
       throw new BusinessValidationException(
-          new StringBuilder()
-              .append("First name must be from ")
-              .append(FIRST_NAME_MIN_LENGTH)
-              .append(" to ")
-              .append(FIRST_NAME_MAX_LENGTH)
-              .append(" signs long.")
-              .toString(),
+          "First name must be from " + FIRST_NAME_MIN_LENGTH + " to " + FIRST_NAME_MAX_LENGTH + " signs long.",
           "firstName"
       );
     }

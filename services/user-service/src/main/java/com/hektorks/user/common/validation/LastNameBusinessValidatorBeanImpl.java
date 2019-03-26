@@ -11,13 +11,7 @@ class LastNameBusinessValidatorBeanImpl implements LastNameBusinessValidatorBean
   public void validate(String lastName) {
     if (!isLastNameValid(lastName)) {
       throw new BusinessValidationException(
-          new StringBuilder()
-              .append("Last name must be from ")
-              .append(LAST_NAME_MIN_LENGTH)
-              .append(" to ")
-              .append(LAST_NAME_MAX_LENGTH)
-              .append(" signs long.")
-              .toString(),
+          "Last name must be from " + LAST_NAME_MIN_LENGTH + " to " + LAST_NAME_MAX_LENGTH + " signs long.",
           "lastName"
       );
     }

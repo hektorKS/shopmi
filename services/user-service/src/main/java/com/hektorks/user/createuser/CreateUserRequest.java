@@ -22,8 +22,7 @@ class CreateUserRequest {
 
   @Override
   public String toString() {
-    StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder
+    return new StringBuilder()
         .append("CreateUserRequest(")
         .append("firstName = ")
         .append(firstName)
@@ -45,7 +44,7 @@ class CreateUserRequest {
         .append(", ")
         .append("countryCode = ")
         .append(countryCode)
-        .append(")");
-    return stringBuilder.toString();
+        .append(")")
+        .toString();
   }
 }

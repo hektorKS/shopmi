@@ -28,6 +28,17 @@ class UsersRepositoryImpl implements UsersRepository {
   }
 
   @Override
+  public void updateUser(User user) {
+    try {
+      UsersMapper usersMapper = sqlSessionTemplate.getMapper(UsersMapper.class);
+      usersMapper.updateUser(user);
+    } catch (Exception exception) {
+      log.warn("Updating user failed [{}].", user, exception);
+      throw new RepositoryException(exception);
+    }
+  }
+
+  @Override
   public User getUserById(Integer id) {
     try {
       UsersMapper usersMapper = sqlSessionTemplate.getMapper(UsersMapper.class);

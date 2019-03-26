@@ -12,14 +12,8 @@ class UsernameBusinessValidatorBeanImpl implements UsernameBusinessValidatorBean
   public void validate(String username) {
     if (!isUsernameLengthValid(username) || !isPatternValid(username)) {
       throw new BusinessValidationException(
-          new StringBuilder()
-              .append("Username must be from ")
-              .append(USERNAME_MIN_LENGTH)
-              .append(" to ")
-              .append(USERNAME_MAX_LENGTH)
-              .append(" signs long. ")
-              .append("It cannot contain white signs.")
-              .toString(),
+          "Username must be from " + USERNAME_MIN_LENGTH + " to " + USERNAME_MAX_LENGTH + " signs long. "
+              + "It cannot contain white signs.",
           "username"
       );
     }

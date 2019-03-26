@@ -8,6 +8,8 @@ public interface UsersMapper {
 
   void createUser(User user);
 
+  int updateUser(User user);
+
   User selectUserById(Integer id);
 
   int countById(Integer id);

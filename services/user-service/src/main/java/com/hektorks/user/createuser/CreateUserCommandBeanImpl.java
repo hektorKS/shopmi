@@ -23,6 +23,7 @@ class CreateUserCommandBeanImpl implements CreateUserCommandBean {
   public Integer execute(CreateUserRequest createUserRequest) {
     businessValidatorBean.validate(createUserRequest);
     try {
+      ///TODO this to command, so it could be reused userExistsByUsernameAndEmailCommand-> execute
       if (usersRepository.userExistsByUsername(createUserRequest.getUsername())) {
         log.info("User with username [{}] already exists.", createUserRequest.getUsername());
         throw new UserExistsException(createUserRequest.getUsername());

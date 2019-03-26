@@ -10,11 +10,7 @@ class PhoneNumberBusinessValidatorBeanImpl implements PhoneNumberBusinessValidat
   public void validate(String phoneNumber) {
     if (!isValidPattern(phoneNumber)) {
       throw new BusinessValidationException(
-          new StringBuilder()
-              .append("Phone number must match pattern ")
-              .append(PHONE_NUMBER_PATTERN)
-              .append(".")
-              .toString(),
+          "Phone number must match pattern " + PHONE_NUMBER_PATTERN + ".",
           "phoneNumber"
       );
     }

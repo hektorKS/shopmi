@@ -10,11 +10,7 @@ class EmailBusinessValidatorBeanImpl implements EmailBusinessValidatorBean {
   public void validate(String email) {
     if (!isValidPattern(email)) {
       throw new BusinessValidationException(
-          new StringBuilder()
-              .append("Email must match pattern ")
-              .append(EMAIL_PATTERN)
-              .append(".")
-              .toString(),
+          "Email must match pattern " + EMAIL_PATTERN + ".",
           "firstName"
       );
     }

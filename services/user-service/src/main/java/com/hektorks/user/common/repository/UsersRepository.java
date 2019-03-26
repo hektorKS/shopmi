@@ -6,7 +6,7 @@ public interface UsersRepository {
 
   Integer createUser(User user);
 
-  void updateUserById(Integer id);
+  void updateUser(User user);
 
   User getUserById(Integer id);
 
