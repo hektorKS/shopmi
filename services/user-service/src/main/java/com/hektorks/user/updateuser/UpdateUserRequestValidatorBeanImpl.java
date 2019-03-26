@@ -1,6 +1,7 @@
 package com.hektorks.user.updateuser;
 
 
+import com.hektorks.user.common.validation.ApplicableBusinessValidatorBean;
 import com.hektorks.user.common.validation.CountryCodeBusinessValidatorBean;
 import com.hektorks.user.common.validation.EmailBusinessValidatorBean;
 import com.hektorks.user.common.validation.FirstNameBusinessValidatorBean;
@@ -8,12 +9,9 @@ import com.hektorks.user.common.validation.LastNameBusinessValidatorBean;
 import com.hektorks.user.common.validation.PhoneNumberBusinessValidatorBean;
 import com.hektorks.user.common.validation.UsernameBusinessValidatorBean;
 import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
 @AllArgsConstructor
-class UpdateUserRequestValidatorBeanInjector {
+class UpdateUserRequestValidatorBeanImpl implements UpdateUserRequestValidatorBean {
 
   private final FirstNameBusinessValidatorBean firstNameValidatorBean;
   private final LastNameBusinessValidatorBean lastNameValidatorBean;
@@ -22,15 +20,19 @@ class UpdateUserRequestValidatorBeanInjector {
   private final PhoneNumberBusinessValidatorBean phoneNumberValidatorBean;
   private final CountryCodeBusinessValidatorBean countryCodeValidatorBean;
 
-  @Bean
-  UpdateUserRequestValidatorBean getUpdateUserRequestValidatorBean() {
-    return new UpdateUserRequestValidatorBeanImpl(
-        firstNameValidatorBean,
-        lastNameValidatorBean,
-        usernameValidatorBean,
-        emailValidatorBean,
-        phoneNumberValidatorBean,
-        countryCodeValidatorBean
-    );
+  @Override
+  public void validate(UpdateUserRequest updateUserRequest) {
+    validate(updateUserRequest.getFirstName(), firstNameValidatorBean);
+    validate(updateUserRequest.getLastName(), lastNameValidatorBean);
+    validate(updateUserRequest.getUsername(), usernameValidatorBean);
+    validate(updateUserRequest.getEmail(), emailValidatorBean);
+    validate(updateUserRequest.getPhoneNumber(), phoneNumberValidatorBean);
+    validate(updateUserRequest.getCountryCode(), countryCodeValidatorBean);
+  }
+
+  private void validate(String field, ApplicableBusinessValidatorBean<String> applicableBusinessValidatorBean) {
+    if (applicableBusinessValidatorBean.isApplicable(field)) {
+      applicableBusinessValidatorBean.validate(field);
+    }
   }
 }

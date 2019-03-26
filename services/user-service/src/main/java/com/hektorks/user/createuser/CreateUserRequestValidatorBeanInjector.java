@@ -25,7 +25,7 @@ class CreateUserRequestValidatorBeanInjector {
 
   @Bean
   CreateUserRequestValidatorBean getCreateUserRequestValidatorBean() {
-    return new CreateUserRequestValidatorBean(
+    return new CreateUserRequestValidatorBeanImpl(
         firstNameValidatorBean,
         lastNameValidatorBean,
         usernameValidatorBean,

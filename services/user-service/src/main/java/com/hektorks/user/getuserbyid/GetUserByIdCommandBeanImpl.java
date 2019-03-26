@@ -1,6 +1,5 @@
 package com.hektorks.user.getuserbyid;
 
-import com.hektorks.exceptionhandling.ResourceNotFoundException;
 import com.hektorks.user.common.User;
 import com.hektorks.user.common.repository.UsersRepository;
 import com.hektorks.user.getuserbyid.exceptions.GetUserByIdCommandException;
@@ -16,15 +15,9 @@ class GetUserByIdCommandBeanImpl implements GetUserByIdCommandBean {
   @Override
   public User execute(Integer userId) {
     try {
-      User user = usersRepository.getUserById(userId);
-      if (user == null) {
-        throw new ResourceNotFoundException();
-      }
-      return user;
-    } catch (ResourceNotFoundException exception) {
-      log.info("User not found for id [{}]", userId);
-      throw exception;
+      return usersRepository.getUserById(userId);
     } catch (Exception exception) {
+      log.warn("Getting user failed", exception);
       throw new GetUserByIdCommandException(userId, exception);
     }
   }

@@ -15,12 +15,37 @@ class UpdateUserRequest {
   private String phoneNumber;
   private String countryCode;
 
-  public boolean isNotEmpty() {
+  boolean isNotEmpty() {
     return firstName != null ||
         lastName != null ||
         username != null ||
         email != null ||
         phoneNumber != null ||
         countryCode != null;
+  }
+
+  @Override
+  public String toString() {
+    return new StringBuilder()
+        .append("UpdateUserRequest(")
+        .append("firstName = ")
+        .append(firstName)
+        .append(", ")
+        .append("lastName = ")
+        .append(lastName)
+        .append(", ")
+        .append("username = ")
+        .append(username)
+        .append(", ")
+        .append("email = ")
+        .append(email)
+        .append(", ")
+        .append("phoneNumber = ")
+        .append(phoneNumber != null ? phoneNumber.replaceAll("\\d", "X") : null)
+        .append(", ")
+        .append("countryCode = ")
+        .append(countryCode)
+        .append(")")
+        .toString();
   }
 }

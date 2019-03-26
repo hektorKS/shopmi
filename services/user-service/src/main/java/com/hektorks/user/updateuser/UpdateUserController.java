@@ -25,7 +25,7 @@ class UpdateUserController {
     try {
       updateUserRequest.setId(userId);
       updateUserByIdCommandBean.execute(updateUserRequest);
-      return ResponseEntity.ok().body(null);
+      return ResponseEntity.noContent().build();
     } catch (ResourceNotFoundException exception) {
       return ResponseEntity.notFound().build();
     } catch (BusinessValidationException exception) {

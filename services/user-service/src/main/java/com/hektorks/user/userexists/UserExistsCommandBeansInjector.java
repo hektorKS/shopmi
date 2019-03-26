@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @AllArgsConstructor
-class UserExistsCommandBeanInjector {
+class UserExistsCommandBeansInjector {
 
   private final UsersRepository usersRepository;
 
@@ -15,5 +15,16 @@ class UserExistsCommandBeanInjector {
   UserExistsCommandBean getUserExistsCommandBean() {
     return new UserExistsCommandBeanImpl(usersRepository);
   }
+
+  @Bean
+  UserExistsByUsernameCommandBean getUserExistsByUsernameCommandBean() {
+    return new UserExistsByUsernameCommandBeanImpl(usersRepository);
+  }
+
+  @Bean
+  UserExistsByEmailCommandBean getUserExistsByEmailCommandBean() {
+    return new UserExistsByEmailCommandBeanImpl(usersRepository);
+  }
+
 
 }
