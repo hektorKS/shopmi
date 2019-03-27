@@ -9,6 +9,7 @@ import com.hektorks.exceptionhandling.BusinessValidationException;
 import com.hektorks.exceptionhandling.BusinessValidationExceptionMapper;
 import com.hektorks.exceptionhandling.CommandException;
 import com.hektorks.exceptionhandling.RequestValidationErrors;
+import com.hektorks.exceptionhandling.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +42,8 @@ class ChangeUserPasswordController {
       changeUserPasswordRequest.setUserId(userId);
       changeUserPasswordCommandBean.execute(changeUserPasswordRequest);
       return ResponseEntity.noContent().build();
+    } catch (ResourceNotFoundException exception) {
+      return ResponseEntity.notFound().build();
     } catch (BusinessValidationException exception) {
       return ResponseEntity.unprocessableEntity().body(BusinessValidationExceptionMapper.toMap(exception));
     } catch (CommandException exception) {
