@@ -3,25 +3,19 @@
  *
  */
 
-package com.hektorks.user.common.repository;
+package com.hektorks.user.common.repository.mappers;
 
 import com.hektorks.user.common.User;
 import com.hektorks.user.common.repository.dao.UserDataDao;
 import com.hektorks.user.common.repository.dao.UserPasswordDao;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface UsersRepository {
+@Mapper
+public interface UsersModificationMapper {
 
-  Integer createUser(User user);
+  void createUser(User user);
 
   void updateUserData(UserDataDao userDataDao);
 
   void updateUserPassword(UserPasswordDao userPasswordDao);
-
-  User getUserById(Integer id);
-
-  boolean userExistsById(Integer id);
-
-  boolean userExistsByUsername(String username);
-
-  boolean userExistsByEmail(String email);
 }

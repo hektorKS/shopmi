@@ -12,11 +12,11 @@ import javax.validation.constraints.Null;
 
 @Data
 class ChangeUserPasswordRequest {
-  @Null
+  @Null(message = "Field userId must be null.")
   private Integer userId;
-  @NotNull
+  @NotNull(message = "Mandatory field oldPassword missing.")
   private String oldPassword;
-  @NotNull
+  @NotNull(message = "Mandatory field newPassword missing.")
   private String newPassword;
 
   @Override

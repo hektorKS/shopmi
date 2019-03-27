@@ -3,16 +3,15 @@
  *
  */
 
-package com.hektorks.user.updateuser;
+package com.hektorks.user.common.repository.dao;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.validation.constraints.Null;
-
 @Data
-class UpdateUserRequest {
-  @Null(message = "Field userId must be null.")
-  private Integer userId;
+@AllArgsConstructor
+public class UserDataDao {
+  private Integer id;
   private String firstName;
   private String lastName;
   private String username;
@@ -20,19 +19,10 @@ class UpdateUserRequest {
   private String phoneNumber;
   private String countryCode;
 
-  boolean isNotEmpty() {
-    return firstName != null ||
-        lastName != null ||
-        username != null ||
-        email != null ||
-        phoneNumber != null ||
-        countryCode != null;
-  }
-
   @Override
   public String toString() {
-    return "UpdateUserRequest{" +
-        "userId=" + userId +
+    return "UserDataDao{" +
+        "id=" + id +
         ", firstName='" + firstName + '\'' +
         ", lastName='" + lastName + '\'' +
         ", username='" + username + '\'' +
