@@ -7,6 +7,7 @@
         <package name="com.hektorks.user.common"/>
     </typeAliases>
     <mappers>
-        <mapper resource="mappers/UsersMapper.xml"/>
+        <mapper resource="mappers/UsersSelectionMapper.xml"/>
+        <mapper resource="mappers/UsersModificationMapper.xml"/>
     </mappers>
 </configuration>

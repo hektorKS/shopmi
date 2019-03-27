@@ -7,7 +7,10 @@ package com.hektorks.user.common.repository;
 
 import com.hektorks.exceptionhandling.RepositoryException;
 import com.hektorks.user.common.User;
-import com.hektorks.user.common.repository.mappers.UsersMapper;
+import com.hektorks.user.common.repository.dao.UserDataDao;
+import com.hektorks.user.common.repository.dao.UserPasswordDao;
+import com.hektorks.user.common.repository.mappers.UsersModificationMapper;
+import com.hektorks.user.common.repository.mappers.UsersSelectionMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -23,8 +26,8 @@ class UsersRepositoryImpl implements UsersRepository {
   @Override
   public Integer createUser(User user) {
     try {
-      UsersMapper usersMapper = sqlSessionTemplate.getMapper(UsersMapper.class);
-      usersMapper.createUser(user);
+      UsersModificationMapper usersModificationMapper = sqlSessionTemplate.getMapper(UsersModificationMapper.class);
+      usersModificationMapper.createUser(user);
       return user.getId();
     } catch (Exception exception) {
       log.warn("User insertion failed [{}].", user, exception);
@@ -33,12 +36,23 @@ class UsersRepositoryImpl implements UsersRepository {
   }
 
   @Override
-  public void updateUser(User user) {
+  public void updateUserData(UserDataDao userDataDao) {
     try {
-      UsersMapper usersMapper = sqlSessionTemplate.getMapper(UsersMapper.class);
-      usersMapper.updateUser(user);
+      UsersModificationMapper usersModificationMapper = sqlSessionTemplate.getMapper(UsersModificationMapper.class);
+      usersModificationMapper.updateUserData(userDataDao);
     } catch (Exception exception) {
-      log.warn("Updating user failed [{}].", user, exception);
+      log.warn("Updating user data failed [{}].", userDataDao, exception);
+      throw new RepositoryException(exception);
+    }
+  }
+
+  @Override
+  public void updateUserPassword(UserPasswordDao userPasswordDao) {
+    try {
+      UsersModificationMapper usersModificationMapper = sqlSessionTemplate.getMapper(UsersModificationMapper.class);
+      usersModificationMapper.updateUserPassword(userPasswordDao);
+    } catch (Exception exception) {
+      log.warn("Updating user password failed [{}].", userPasswordDao, exception);
       throw new RepositoryException(exception);
     }
   }
@@ -46,8 +60,8 @@ class UsersRepositoryImpl implements UsersRepository {
   @Override
   public User getUserById(Integer id) {
     try {
-      UsersMapper usersMapper = sqlSessionTemplate.getMapper(UsersMapper.class);
-      return usersMapper.selectUserById(id);
+      UsersSelectionMapper usersSelectionMapper = sqlSessionTemplate.getMapper(UsersSelectionMapper.class);
+      return usersSelectionMapper.selectUserById(id);
     } catch (Exception exception) {
       log.warn("Getting user by id [{}] failed.", id, exception);
       throw new RepositoryException(exception);
@@ -57,8 +71,8 @@ class UsersRepositoryImpl implements UsersRepository {
   @Override
   public boolean userExistsById(Integer id) {
     try {
-      UsersMapper usersMapper = sqlSessionTemplate.getMapper(UsersMapper.class);
-      return usersMapper.countById(id) > 0;
+      UsersSelectionMapper usersSelectionMapper = sqlSessionTemplate.getMapper(UsersSelectionMapper.class);
+      return usersSelectionMapper.countById(id) > 0;
     } catch (Exception exception) {
       log.warn("Checking if user exists by id [{}] failed.", id, exception);
       throw new RepositoryException(exception);
@@ -68,8 +82,8 @@ class UsersRepositoryImpl implements UsersRepository {
   @Override
   public boolean userExistsByUsername(String username) {
     try {
-      UsersMapper usersMapper = sqlSessionTemplate.getMapper(UsersMapper.class);
-      return usersMapper.countByUsername(username) > 0;
+      UsersSelectionMapper usersSelectionMapper = sqlSessionTemplate.getMapper(UsersSelectionMapper.class);
+      return usersSelectionMapper.countByUsername(username) > 0;
     } catch (Exception exception) {
       log.warn("Checking if user with username [{}] exists failed.", username, exception);
       throw new RepositoryException(exception);
@@ -79,8 +93,8 @@ class UsersRepositoryImpl implements UsersRepository {
   @Override
   public boolean userExistsByEmail(String email) {
     try {
-      UsersMapper usersMapper = sqlSessionTemplate.getMapper(UsersMapper.class);
-      return usersMapper.countByEmail(email) > 0;
+      UsersSelectionMapper usersSelectionMapper = sqlSessionTemplate.getMapper(UsersSelectionMapper.class);
+      return usersSelectionMapper.countByEmail(email) > 0;
     } catch (Exception exception) {
       log.warn("Checking if user with email [{}] exists failed.", email, exception);
       throw new RepositoryException(exception);

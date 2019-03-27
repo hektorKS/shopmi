@@ -9,11 +9,7 @@ import com.hektorks.user.common.User;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface UsersMapper {
-
-  void createUser(User user);
-
-  void updateUser(User user);
+public interface UsersSelectionMapper {
 
   User selectUserById(Integer id);
 

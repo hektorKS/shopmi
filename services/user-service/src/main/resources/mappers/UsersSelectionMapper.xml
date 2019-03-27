@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hektorks.user.common.repository.mappers.UsersMapper">
+<mapper namespace="com.hektorks.user.common.repository.mappers.UsersSelectionMapper">
     <resultMap id="UserResultMap" type="User">
         <result property="id" column="ID"/>
         <result property="firstName" column="FIRST_NAME"/>
@@ -17,37 +17,7 @@
         <result property="salt" column="SALT"/>
     </resultMap>
 
-    <insert id="createUser" parameterType="User" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
-        INSERT INTO USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, SALT, EMAIL, PHONE_NUMBER, COUNTRY_CODE)
-        VALUES (#{firstName},
-                #{lastName},
-                #{username},
-                #{encryptedPassword.password},
-                #{encryptedPassword.salt},
-                #{email},
-                #{phoneNumber},
-                #{countryCode})
-    </insert>
-
-    <update id="updateUser" parameterType="User">
-        UPDATE USERS
-        <set>
-            <if test="firstName != null">FIRST_NAME = #{firstName},</if>
-            <if test="lastName != null">LAST_NAME = #{lastName},</if>
-            <if test="username != null">USERNAME = #{username},</if>
-            <if test="email != null">EMAIL = #{email},</if>
-            <if test="phoneNumber != null">PHONE_NUMBER = #{phoneNumber},</if>
-            <if test="countryCode != null">COUNTRY_CODE = #{countryCode},</if>
-            <if test="encryptedPassword != null">
-                <if test="encryptedPassword.password != null and encryptedPassword.salt != null">
-                    PASSWORD = #{encryptedPassword.password}, SALT = #{encryptedPassword.salt}
-                </if>
-            </if>
-        </set>
-        WHERE ID = #{id}
-    </update>
-
-    <select id="selectUserById" parameterType="Integer" resultMap="UserResultMap">
+        <select id="selectUserById" parameterType="Integer" resultMap="UserResultMap">
         SELECT ID, FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, SALT, EMAIL, PHONE_NUMBER, COUNTRY_CODE
         FROM USERS
         WHERE ID = #{id}
