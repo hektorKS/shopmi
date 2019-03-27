@@ -10,7 +10,7 @@ import com.hektorks.exceptionhandling.ResourceNotFoundException;
 import com.hektorks.user.common.User;
 import com.hektorks.user.common.repository.UsersRepository;
 import com.hektorks.user.createuser.exceptions.EmailAlreadyUsedException;
-import com.hektorks.user.createuser.exceptions.UserExistsException;
+import com.hektorks.user.createuser.exceptions.UsernameExistsException;
 import com.hektorks.user.getuserbyid.GetUserByIdCommandBean;
 import com.hektorks.user.updateuser.exceptions.UpdateUserCommandException;
 import com.hektorks.user.userexists.UserExistsByEmailCommandBean;
@@ -34,23 +34,23 @@ class UpdateUserByIdCommandBeanImpl implements UpdateUserByIdCommandBean {
   public Void execute(UpdateUserRequest updateUserRequest) {
     updateUserRequestValidatorBean.validate(updateUserRequest);
     try {
-      if (!userExistsCommandBean.execute(updateUserRequest.getId())) {
-        log.info("User with id [{}] not found.", updateUserRequest.getId());
+      if (!userExistsCommandBean.execute(updateUserRequest.getUserId())) {
+        log.info("User with id [{}] not found.", updateUserRequest.getUserId());
         throw new ResourceNotFoundException();
       }
 
       if (!updateUserRequest.isNotEmpty()) {
-        log.info("Update not needed.");
+        log.info("Update not needed for user [{}].", updateUserRequest.getUserId());
         return null;
       }
 
-      User currentUser = getUserByIdCommandBean.execute(updateUserRequest.getId());
+      User currentUser = getUserByIdCommandBean.execute(updateUserRequest.getUserId());
       String username = updateUserRequest.getUsername();
       String currentUsername = currentUser.getUsername();
       boolean usernameChanged = username != null && !currentUsername.equals(username);
       if (usernameChanged && userExistsByUsernameCommandBean.execute(username)) {
         log.info("Username [{}] is already used.", username);
-        throw new UserExistsException(username);
+        throw new UsernameExistsException(username);
       }
 
       String email = updateUserRequest.getEmail();
@@ -62,7 +62,7 @@ class UpdateUserByIdCommandBeanImpl implements UpdateUserByIdCommandBean {
       }
 
       usersRepository.updateUser(new User(
-          updateUserRequest.getId(),
+          updateUserRequest.getUserId(),
           updateUserRequest.getFirstName(),
           updateUserRequest.getLastName(),
           updateUserRequest.getUsername(),
