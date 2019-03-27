@@ -11,7 +11,7 @@ import com.hektorks.user.common.passwordencryption.PasswordEncryptionBean;
 import com.hektorks.user.common.repository.UsersRepository;
 import com.hektorks.user.createuser.exceptions.CreateUserCommandException;
 import com.hektorks.user.createuser.exceptions.EmailAlreadyUsedException;
-import com.hektorks.user.createuser.exceptions.UserExistsException;
+import com.hektorks.user.createuser.exceptions.UsernameExistsException;
 import com.hektorks.user.userexists.UserExistsByEmailCommandBean;
 import com.hektorks.user.userexists.UserExistsByUsernameCommandBean;
 import lombok.AllArgsConstructor;
@@ -33,7 +33,7 @@ class CreateUserCommandBeanImpl implements CreateUserCommandBean {
     try {
       if (userExistsByUsernameCommandBean.execute(createUserRequest.getUsername())) {
         log.info("Username [{}] is already used.", createUserRequest.getUsername());
-        throw new UserExistsException(createUserRequest.getUsername());
+        throw new UsernameExistsException(createUserRequest.getUsername());
       }
 
       if (userExistsByEmailCommandBean.execute(createUserRequest.getEmail())) {

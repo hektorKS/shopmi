@@ -3,33 +3,44 @@
  *
  */
 
-package com.hektorks.user.updateuser;
+package com.hektorks.user.changepassword;
 
 import com.hektorks.exceptionhandling.BusinessValidationException;
 import com.hektorks.exceptionhandling.BusinessValidationExceptionMapper;
 import com.hektorks.exceptionhandling.CommandException;
+import com.hektorks.exceptionhandling.RequestValidationErrors;
 import com.hektorks.exceptionhandling.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
+
 @RestController
 @RequestMapping("/v1")
 @AllArgsConstructor
-class UpdateUserController {
+class ChangeUserPasswordController {
 
-  private final UpdateUserByIdCommandBean updateUserByIdCommandBean;
+  private final ChangeUserPasswordCommandBean changeUserPasswordCommandBean;
 
-  @PatchMapping("/user/{userId}")
-  ResponseEntity updateUser(@PathVariable Integer userId, @RequestBody UpdateUserRequest updateUserRequest) {
+  @PatchMapping("/user/{userId}/password")
+  public ResponseEntity changeUserPassword(@PathVariable Integer userId,
+                                           @Valid @RequestBody ChangeUserPasswordRequest changeUserPasswordRequest,
+                                           Errors errors
+  ) {
+    if (errors.hasErrors()) {
+      return ResponseEntity.badRequest().body(RequestValidationErrors.fromContextErrors(errors));
+    }
     try {
-      updateUserRequest.setUserId(userId);
-      updateUserByIdCommandBean.execute(updateUserRequest);
+      changeUserPasswordRequest.setUserId(userId);
+      changeUserPasswordCommandBean.execute(changeUserPasswordRequest);
       return ResponseEntity.noContent().build();
     } catch (ResourceNotFoundException exception) {
       return ResponseEntity.notFound().build();
@@ -39,5 +50,4 @@ class UpdateUserController {
       return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
-
 }

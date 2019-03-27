@@ -7,8 +7,8 @@ package com.hektorks.user.createuser.exceptions;
 
 import com.hektorks.exceptionhandling.BusinessValidationException;
 
-public class UserExistsException extends BusinessValidationException {
-  public UserExistsException(String username) {
+public class UsernameExistsException extends BusinessValidationException {
+  public UsernameExistsException(String username) {
     super("User with username " + username + " already exists.", "username");
   }
 }

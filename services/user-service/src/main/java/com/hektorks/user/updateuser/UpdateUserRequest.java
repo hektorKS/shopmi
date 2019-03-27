@@ -12,7 +12,7 @@ import javax.validation.constraints.Null;
 @Data
 class UpdateUserRequest {
   @Null
-  private Integer id;
+  private Integer userId;
   private String firstName;
   private String lastName;
   private String username;
@@ -31,26 +31,14 @@ class UpdateUserRequest {
 
   @Override
   public String toString() {
-    return new StringBuilder()
-        .append("UpdateUserRequest(")
-        .append("firstName = ")
-        .append(firstName)
-        .append(", ")
-        .append("lastName = ")
-        .append(lastName)
-        .append(", ")
-        .append("username = ")
-        .append(username)
-        .append(", ")
-        .append("email = ")
-        .append(email)
-        .append(", ")
-        .append("phoneNumber = ")
-        .append(phoneNumber != null ? phoneNumber.replaceAll("\\d", "X") : null)
-        .append(", ")
-        .append("countryCode = ")
-        .append(countryCode)
-        .append(")")
-        .toString();
+    return "UpdateUserRequest{" +
+        "userId=" + userId +
+        ", firstName='" + firstName + '\'' +
+        ", lastName='" + lastName + '\'' +
+        ", username='" + username + '\'' +
+        ", email='" + email + '\'' +
+        ", phoneNumber='" + (phoneNumber != null ? phoneNumber.replaceAll("\\d", "X") : null) + '\'' +
+        ", countryCode='" + countryCode + '\'' +
+        '}';
   }
 }

@@ -17,4 +17,16 @@ public class PasswordValidationEntity {
   private final String username;
   private final String email;
   private final String phoneNumber;
+
+  @Override
+  public String toString() {
+    return "PasswordValidationEntity{" +
+        "password='" + "XXX" + '\'' +
+        ", firstName='" + firstName + '\'' +
+        ", lastName='" + lastName + '\'' +
+        ", username='" + username + '\'' +
+        ", email='" + email + '\'' +
+        ", phoneNumber='" + (phoneNumber != null ? phoneNumber.replaceAll("\\d", "X") : null) + '\'' +
+        '}';
+  }
 }
