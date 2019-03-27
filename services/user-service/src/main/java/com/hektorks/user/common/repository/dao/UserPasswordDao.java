@@ -8,8 +8,10 @@ package com.hektorks.user.common.repository.dao;
 import com.hektorks.user.common.passwordencryption.EncryptedPassword;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
+@ToString
 @AllArgsConstructor
 public class UserPasswordDao {
   private Integer id;
