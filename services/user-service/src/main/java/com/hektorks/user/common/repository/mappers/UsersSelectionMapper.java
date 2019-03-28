@@ -13,6 +13,8 @@ public interface UsersSelectionMapper {
 
   User selectUserById(Integer id);
 
+  User selectUserByUsername(String username);
+
   int countById(Integer id);
 
   int countByUsername(String username);

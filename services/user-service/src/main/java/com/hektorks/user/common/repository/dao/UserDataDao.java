@@ -6,9 +6,11 @@
 package com.hektorks.user.common.repository.dao;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 @AllArgsConstructor
 public class UserDataDao {
   private Integer id;
