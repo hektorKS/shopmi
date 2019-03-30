@@ -15,13 +15,7 @@ import java.util.Map;
 
 @RestController
 @ControllerAdvice
-public class DashboardExceptionHandler {
-
-  @ResponseStatus(HttpStatus.UNAUTHORIZED)
-  @ExceptionHandler(value = UserAuthenticationFailedException.class)
-  public Map<String, Object> handleException(UserAuthenticationFailedException exception) {
-    return UserAuthenticationFailedExceptionMapper.toMap(exception);
-  }
+public class UserServiceExceptionHandler {
 
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler(value = RequestValidationException.class)
@@ -33,6 +27,12 @@ public class DashboardExceptionHandler {
   @ExceptionHandler(value = ResourceNotFoundException.class)
   public Void handleException() {
     return null;
+  }
+
+  @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+  @ExceptionHandler(value = BusinessValidationException.class)
+  public Map<String, Object> handleException(BusinessValidationException exception) {
+    return BusinessValidationExceptionMapper.toMap(exception);
   }
 
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
