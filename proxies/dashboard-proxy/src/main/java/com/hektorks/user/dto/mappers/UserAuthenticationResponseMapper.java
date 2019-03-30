@@ -5,8 +5,8 @@
 
 package com.hektorks.user.dto.mappers;
 
-import com.hektorks.user.exceptions.MapperException;
 import com.hektorks.user.dto.UserAuthenticationResponse;
+import com.hektorks.user.exceptions.MapperException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;

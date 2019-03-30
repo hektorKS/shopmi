@@ -5,8 +5,8 @@
 
 package com.hektorks.user;
 
-import com.hektorks.user.dto.GetUserByIdResponse;
 import com.hektorks.dashboard.common.AuthenticationCredentials;
+import com.hektorks.user.dto.GetUserByIdResponse;
 import com.hektorks.user.dto.UserAuthenticationResponse;
 import com.hektorks.user.dto.mappers.GetUserResponseMapper;
 import com.hektorks.user.dto.mappers.UserAuthenticationResponseMapper;

@@ -5,6 +5,7 @@
 
 package com.hektorks.dashboard.signin;
 
+import com.hektorks.dashboard.common.AuthenticationCredentials;
 import com.hektorks.dashboard.signin.exceptions.SignInCommandException;
 import com.hektorks.exceptionhandling.BusinessValidationException;
 import com.hektorks.exceptionhandling.RequestValidationException;
@@ -12,7 +13,6 @@ import com.hektorks.exceptionhandling.ResourceNotFoundException;
 import com.hektorks.exceptionhandling.UserAuthenticationFailedException;
 import com.hektorks.security.tokenservice.TokenService;
 import com.hektorks.user.UserService;
-import com.hektorks.dashboard.common.AuthenticationCredentials;
 import com.hektorks.user.dto.UserAuthenticationResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
