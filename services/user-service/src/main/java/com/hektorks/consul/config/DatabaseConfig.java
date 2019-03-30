@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @RefreshScope
 @Configuration
-@ConfigurationProperties(prefix = "database")
+@ConfigurationProperties(prefix = "user-service.database")
 public class DatabaseConfig {
   private String driver;
   private String url;

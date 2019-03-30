@@ -36,7 +36,7 @@ class UpdateUserController {
     } catch (BusinessValidationException exception) {
       return ResponseEntity.unprocessableEntity().body(BusinessValidationExceptionMapper.toMap(exception));
     } catch (CommandException exception) {
-      return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
     }
   }
 

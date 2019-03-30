@@ -22,8 +22,6 @@ private object Versions {
   const val mysqlConnector = "8.0.15"
   const val lombok = "1.18.4"
 
-  const val jwt = "0.10.5"
-
   const val springBootTest = "2.1.3.RELEASE"
   const val junit = "5.4.0"
   const val junitCommons = "1.4.0"
@@ -45,10 +43,6 @@ dependencies {
 
   implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery")
   implementation("org.springframework.cloud:spring-cloud-starter-consul-config")
-
-  compileOnly("io.jsonwebtoken:jjwt-api:${Versions.jwt}")
-  runtimeOnly("io.jsonwebtoken:jjwt-impl:${Versions.jwt}")
-  runtimeOnly("io.jsonwebtoken:jjwt-jackson:${Versions.jwt}")
 
   compileOnly("org.projectlombok:lombok:${Versions.lombok}")
   annotationProcessor("org.projectlombok:lombok:${Versions.lombok}")

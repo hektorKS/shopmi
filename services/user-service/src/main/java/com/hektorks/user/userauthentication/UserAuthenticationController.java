@@ -9,6 +9,7 @@ import com.hektorks.exceptionhandling.BusinessValidationException;
 import com.hektorks.exceptionhandling.BusinessValidationExceptionMapper;
 import com.hektorks.exceptionhandling.CommandException;
 import com.hektorks.exceptionhandling.RequestValidationErrors;
+import com.hektorks.exceptionhandling.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,10 +40,12 @@ class UserAuthenticationController {
     try {
       Integer userId = userAuthenticationCommandBean.execute(userAuthenticationRequest);
       return ResponseEntity.ok(new UserAuthenticationResponse(userId));
+    } catch (ResourceNotFoundException exception) {
+      return ResponseEntity.notFound().build();
     } catch (BusinessValidationException exception) {
       return ResponseEntity.unprocessableEntity().body(BusinessValidationExceptionMapper.toMap(exception));
     } catch (CommandException exception) {
-      return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
     }
   }
 }

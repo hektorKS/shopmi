@@ -34,7 +34,7 @@ class GetUserController {
       }
       return ResponseEntity.ok(GetUserResponse.create(user));
     } catch (CommandException exception) {
-      return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
     }
   }
 

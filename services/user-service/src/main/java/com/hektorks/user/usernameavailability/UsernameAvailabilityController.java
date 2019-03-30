@@ -39,7 +39,7 @@ class UsernameAvailabilityController {
       boolean isUsernameTaken = usernameAvailabilityCommandBean.execute(username);
       return ResponseEntity.ok(new UsernameAvailabilityResponse(username, isUsernameTaken));
     } catch (CommandException exception) {
-      return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
     }
   }
 }
