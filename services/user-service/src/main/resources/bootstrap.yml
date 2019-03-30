@@ -7,6 +7,7 @@ spring:
       port: 8500
       config:
         enabled: true
+        name: shopmi
         prefix:
       discovery:
         healthCheckPath: /health

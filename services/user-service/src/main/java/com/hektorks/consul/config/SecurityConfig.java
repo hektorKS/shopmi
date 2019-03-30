@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @RefreshScope
 @Configuration
-@ConfigurationProperties(prefix = "security")
+@ConfigurationProperties(prefix = "user-service.security")
 public class SecurityConfig {
   private String encryptionSecret;
 }

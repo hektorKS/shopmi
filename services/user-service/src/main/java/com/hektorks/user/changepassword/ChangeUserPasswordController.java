@@ -5,13 +5,9 @@
 
 package com.hektorks.user.changepassword;
 
-import com.hektorks.exceptionhandling.BusinessValidationException;
-import com.hektorks.exceptionhandling.BusinessValidationExceptionMapper;
-import com.hektorks.exceptionhandling.CommandException;
 import com.hektorks.exceptionhandling.RequestValidationErrors;
-import com.hektorks.exceptionhandling.ResourceNotFoundException;
+import com.hektorks.exceptionhandling.RequestValidationException;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -31,23 +27,16 @@ class ChangeUserPasswordController {
   private final ChangeUserPasswordCommandBean changeUserPasswordCommandBean;
 
   @PatchMapping("/user/{userId}/password")
-  public ResponseEntity changeUserPassword(@PathVariable Integer userId,
-                                           @Valid @RequestBody ChangeUserPasswordRequest changeUserPasswordRequest,
-                                           Errors errors
+  public ResponseEntity changeUserPassword(
+      @PathVariable Integer userId,
+      @Valid @RequestBody ChangeUserPasswordRequest changeUserPasswordRequest,
+      Errors errors
   ) {
     if (errors.hasErrors()) {
-      return ResponseEntity.badRequest().body(RequestValidationErrors.fromContextErrors(errors));
+      throw new RequestValidationException(RequestValidationErrors.fromContextErrors(errors));
     }
-    try {
-      changeUserPasswordRequest.setUserId(userId);
-      changeUserPasswordCommandBean.execute(changeUserPasswordRequest);
-      return ResponseEntity.noContent().build();
-    } catch (ResourceNotFoundException exception) {
-      return ResponseEntity.notFound().build();
-    } catch (BusinessValidationException exception) {
-      return ResponseEntity.unprocessableEntity().body(BusinessValidationExceptionMapper.toMap(exception));
-    } catch (CommandException exception) {
-      return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    changeUserPasswordRequest.setUserId(userId);
+    changeUserPasswordCommandBean.execute(changeUserPasswordRequest);
+    return ResponseEntity.noContent().build();
   }
 }

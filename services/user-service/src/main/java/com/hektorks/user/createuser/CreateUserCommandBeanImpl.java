@@ -29,8 +29,9 @@ class CreateUserCommandBeanImpl implements CreateUserCommandBean {
 
   @Override
   public Integer execute(CreateUserRequest createUserRequest) {
-    createUserRequestValidatorBean.validate(createUserRequest);
     try {
+      createUserRequestValidatorBean.validate(createUserRequest);
+
       if (userExistsByUsernameCommandBean.execute(createUserRequest.getUsername())) {
         log.info("Username [{}] is already used.", createUserRequest.getUsername());
         throw new UsernameExistsException(createUserRequest.getUsername());

@@ -5,12 +5,7 @@
 
 package com.hektorks.user.updateuser;
 
-import com.hektorks.exceptionhandling.BusinessValidationException;
-import com.hektorks.exceptionhandling.BusinessValidationExceptionMapper;
-import com.hektorks.exceptionhandling.CommandException;
-import com.hektorks.exceptionhandling.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,17 +22,8 @@ class UpdateUserController {
 
   @PatchMapping("/user/{userId}")
   ResponseEntity updateUser(@PathVariable Integer userId, @RequestBody UpdateUserRequest updateUserRequest) {
-    try {
-      updateUserRequest.setUserId(userId);
-      updateUserByIdCommandBean.execute(updateUserRequest);
-      return ResponseEntity.noContent().build();
-    } catch (ResourceNotFoundException exception) {
-      return ResponseEntity.notFound().build();
-    } catch (BusinessValidationException exception) {
-      return ResponseEntity.unprocessableEntity().body(BusinessValidationExceptionMapper.toMap(exception));
-    } catch (CommandException exception) {
-      return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    updateUserRequest.setUserId(userId);
+    updateUserByIdCommandBean.execute(updateUserRequest);
+    return ResponseEntity.noContent().build();
   }
-
 }

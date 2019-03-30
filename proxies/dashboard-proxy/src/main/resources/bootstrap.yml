@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: dashboard-proxy
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      config:
+        enabled: true
+        name: shopmi
+        prefix:
+      discovery:
+        healthCheckPath: /health
+        healthCheckInterval: 20s
+        instanceId: ${spring.application.name}:${random.value}

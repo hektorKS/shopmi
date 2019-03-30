@@ -5,11 +5,9 @@
 
 package com.hektorks.user.getuserbyid;
 
-import com.hektorks.exceptionhandling.CommandException;
 import com.hektorks.user.common.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,16 +24,11 @@ class GetUserController {
 
   @GetMapping("/user/{userId}")
   ResponseEntity getUser(@PathVariable Integer userId) {
-    try {
-      User user = getUserByIdCommandBean.execute(userId);
-      if (user == null) {
-        log.info("User not found for id [{}]", userId);
-        return ResponseEntity.notFound().build();
-      }
-      return ResponseEntity.ok(GetUserResponse.create(user));
-    } catch (CommandException exception) {
-      return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    User user = getUserByIdCommandBean.execute(userId);
+    if (user == null) {
+      log.info("User not found for id [{}]", userId);
+      return ResponseEntity.notFound().build();
     }
+    return ResponseEntity.ok(GetUserResponse.create(user));
   }
-
 }

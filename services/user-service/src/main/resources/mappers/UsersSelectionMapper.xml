@@ -17,10 +17,16 @@
         <result property="salt" column="SALT"/>
     </resultMap>
 
-        <select id="selectUserById" parameterType="Integer" resultMap="UserResultMap">
+    <select id="selectUserById" parameterType="Integer" resultMap="UserResultMap">
         SELECT ID, FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, SALT, EMAIL, PHONE_NUMBER, COUNTRY_CODE
         FROM USERS
         WHERE ID = #{id}
+    </select>
+
+    <select id="selectUserByUsername" parameterType="String" resultMap="UserResultMap">
+        SELECT ID, FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, SALT, EMAIL, PHONE_NUMBER, COUNTRY_CODE
+        FROM USERS
+        WHERE USERNAME = #{username}
     </select>
 
     <select id="countById" parameterType="Integer" resultType="Integer">

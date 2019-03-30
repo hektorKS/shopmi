@@ -19,6 +19,8 @@ public interface UsersRepository {
 
   User getUserById(Integer id);
 
+  User getUserByUsername(String username);
+
   boolean userExistsById(Integer id);
 
   boolean userExistsByUsername(String username);

@@ -1,0 +1,8 @@
+{
+  "shopmi": {
+    "security": {
+      "jwtSecret": "bfd9067872874c9c82039df69d8a8260",
+      "jwtExpirationSeconds": 300
+    }
+  }
+}

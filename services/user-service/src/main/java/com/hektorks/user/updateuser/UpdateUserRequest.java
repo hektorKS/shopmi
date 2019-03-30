@@ -6,10 +6,12 @@
 package com.hektorks.user.updateuser;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.validation.constraints.Null;
 
 @Data
+@ToString
 class UpdateUserRequest {
   @Null(message = "Field userId must be null.")
   private Integer userId;
@@ -27,18 +29,5 @@ class UpdateUserRequest {
         email != null ||
         phoneNumber != null ||
         countryCode != null;
-  }
-
-  @Override
-  public String toString() {
-    return "UpdateUserRequest{" +
-        "userId=" + userId +
-        ", firstName='" + firstName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        ", username='" + username + '\'' +
-        ", email='" + email + '\'' +
-        ", phoneNumber='" + (phoneNumber != null ? phoneNumber.replaceAll("\\d", "X") : null) + '\'' +
-        ", countryCode='" + countryCode + '\'' +
-        '}';
   }
 }

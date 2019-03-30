@@ -69,6 +69,17 @@ class UsersRepositoryImpl implements UsersRepository {
   }
 
   @Override
+  public User getUserByUsername(String username) {
+    try {
+      UsersSelectionMapper usersSelectionMapper = sqlSessionTemplate.getMapper(UsersSelectionMapper.class);
+      return usersSelectionMapper.selectUserByUsername(username);
+    } catch (Exception exception) {
+      log.warn("Getting user by username [{}] failed.", username, exception);
+      throw new RepositoryException(exception);
+    }
+  }
+
+  @Override
   public boolean userExistsById(Integer id) {
     try {
       UsersSelectionMapper usersSelectionMapper = sqlSessionTemplate.getMapper(UsersSelectionMapper.class);

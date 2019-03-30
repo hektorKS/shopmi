@@ -5,11 +5,10 @@
 
 package com.hektorks.user.usernameavailability;
 
-import com.hektorks.exceptionhandling.CommandException;
 import com.hektorks.exceptionhandling.RequestValidationErrors;
+import com.hektorks.exceptionhandling.RequestValidationException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,14 +31,10 @@ class UsernameAvailabilityController {
                                            Errors errors
   ) {
     if (errors.hasErrors()) {
-      return ResponseEntity.badRequest().body(RequestValidationErrors.fromContextErrors(errors));
+      throw new RequestValidationException(RequestValidationErrors.fromContextErrors(errors));
     }
-    try {
-      String username = usernameAvailabilityRequest.getUsername();
-      boolean isUsernameTaken = usernameAvailabilityCommandBean.execute(username);
-      return ResponseEntity.ok(new UsernameAvailabilityResponse(username, isUsernameTaken));
-    } catch (CommandException exception) {
-      return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    String username = usernameAvailabilityRequest.getUsername();
+    boolean isUsernameTaken = usernameAvailabilityCommandBean.execute(username);
+    return ResponseEntity.ok(new UsernameAvailabilityResponse(username, isUsernameTaken));
   }
 }

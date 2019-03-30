@@ -33,8 +33,9 @@ class UpdateUserByIdCommandBeanImpl implements UpdateUserByIdCommandBean {
 
   @Override
   public Void execute(UpdateUserRequest updateUserRequest) {
-    updateUserRequestValidatorBean.validate(updateUserRequest);
     try {
+      updateUserRequestValidatorBean.validate(updateUserRequest);
+
       if (!userExistsCommandBean.execute(updateUserRequest.getUserId())) {
         log.info("User with id [{}] not found.", updateUserRequest.getUserId());
         throw new ResourceNotFoundException();
