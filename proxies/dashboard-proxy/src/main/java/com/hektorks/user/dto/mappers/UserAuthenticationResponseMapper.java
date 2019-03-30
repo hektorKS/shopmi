@@ -21,7 +21,7 @@ public class UserAuthenticationResponseMapper {
       JSONObject jsonObject = new JSONObject(jsonBody);
       return new UserAuthenticationResponse(jsonObject.getInt(USER_ID));
     } catch (JSONException exception) {
-      log.info("Mapping from json body [{}] failed.", jsonBody, exception);
+      log.warn("Mapping from json body [{}] failed.", jsonBody, exception);
       throw new MapperException(jsonBody, exception);
     }
   }

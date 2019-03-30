@@ -6,8 +6,9 @@
 package com.hektorks.dashboard.getprofile;
 
 import com.hektorks.dashboard.common.CommandBean;
+import com.hektorks.dashboard.common.UserProfile;
 
-interface GetUserProfileCommandBean extends CommandBean<String, String> {
+interface GetUserProfileCommandBean extends CommandBean<UserProfile, Integer> {
   @Override
-  String execute(String token);
+  UserProfile execute(Integer userId);
 }

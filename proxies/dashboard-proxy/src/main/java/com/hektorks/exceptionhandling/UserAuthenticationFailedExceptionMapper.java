@@ -12,11 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class UserAuthenticationFailedExceptionMapper extends RuntimeException {
+class UserAuthenticationFailedExceptionMapper extends RuntimeException {
   private static final String MESSAGE = "message";
   private static final String REASON = "reason";
 
-  public static Map<String, Object> toMap(UserAuthenticationFailedException exception) {
+  static Map<String, Object> toMap(UserAuthenticationFailedException exception) {
     Map<String, Object> result = new HashMap<>();
     result.put(MESSAGE, exception.getMessage());
     result.put(REASON, exception.getReason());

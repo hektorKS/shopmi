@@ -5,14 +5,9 @@
 
 package com.hektorks.dashboard.signin;
 
-import com.hektorks.exceptionhandling.CommandException;
 import com.hektorks.exceptionhandling.RequestValidationErrors;
 import com.hektorks.exceptionhandling.RequestValidationException;
-import com.hektorks.exceptionhandling.ResourceNotFoundException;
-import com.hektorks.exceptionhandling.UserAuthenticationFailedException;
-import com.hektorks.exceptionhandling.UserAuthenticationFailedExceptionMapper;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,27 +28,9 @@ class SignInController {
   @PostMapping("/sign-in")
   public ResponseEntity createUser(@Valid @RequestBody SignInRequest signInRequest, Errors errors) {
     if (errors.hasErrors()) {
-      return ResponseEntity.badRequest().body(RequestValidationErrors.fromContextErrors(errors));
+      throw new RequestValidationException(RequestValidationErrors.fromContextErrors(errors));
     }
-    try {
-      SignInResponse signInResponse = new SignInResponse(signInCommandBean.execute(signInRequest));
-      return ResponseEntity.ok(signInResponse);
-    } catch (UserAuthenticationFailedException exception) {
-      return ResponseEntity
-          .status(HttpStatus.UNAUTHORIZED)
-          .body(UserAuthenticationFailedExceptionMapper.toMap(exception));
-    } catch (RequestValidationException exception) {
-      return ResponseEntity
-          .status(HttpStatus.BAD_REQUEST)
-          .body(exception.getErrors());
-    } catch (ResourceNotFoundException exception) {
-      return ResponseEntity
-          .status(HttpStatus.NOT_FOUND)
-          .build();
-    } catch (CommandException exception) {
-      return ResponseEntity.
-          status(HttpStatus.INTERNAL_SERVER_ERROR)
-          .body(exception.getMessage());
-    }
+    SignInResponse signInResponse = SignInResponse.create(signInCommandBean.execute(signInRequest));
+    return ResponseEntity.ok(signInResponse);
   }
 }

@@ -5,12 +5,21 @@
 
 package com.hektorks.dashboard.signin;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
+import lombok.ToString.Exclude;
 
 
 @Data
-@AllArgsConstructor
+@ToString
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 class SignInResponse {
+  @Exclude
   private String token;
+
+  static SignInResponse create(String token) {
+    return new SignInResponse(token);
+  }
 }

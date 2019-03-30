@@ -5,7 +5,6 @@
 
 package com.hektorks.security;
 
-import com.hektorks.security.JWTUserDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 

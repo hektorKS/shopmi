@@ -7,8 +7,10 @@ package com.hektorks.user.usernameavailability;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
+@ToString
 @AllArgsConstructor
 class UsernameAvailabilityResponse {
   private final String username;

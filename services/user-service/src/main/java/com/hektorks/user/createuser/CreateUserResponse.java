@@ -5,11 +5,16 @@
 
 package com.hektorks.user.createuser;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 class CreateUserResponse {
   private final Integer userId;
+
+  static CreateUserResponse create(Integer userId) {
+    return new CreateUserResponse(userId);
+  }
 }

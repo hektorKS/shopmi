@@ -12,7 +12,7 @@ import com.hektorks.exceptionhandling.ResourceNotFoundException;
 import com.hektorks.exceptionhandling.UserAuthenticationFailedException;
 import com.hektorks.security.tokenservice.TokenService;
 import com.hektorks.user.UserService;
-import com.hektorks.user.dto.UserAuthenticationRequest;
+import com.hektorks.dashboard.common.AuthenticationCredentials;
 import com.hektorks.user.dto.UserAuthenticationResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ class SignInCommandBeanImpl implements SignInCommandBean {
   public String execute(SignInRequest createUserRequest) {
     try {
       UserAuthenticationResponse response = userService.userAuthentication(
-          new UserAuthenticationRequest(createUserRequest.getUsername(), createUserRequest.getPassword())
+          new AuthenticationCredentials(createUserRequest.getUsername(), createUserRequest.getPassword())
       );
       return tokenService.createToken(response.getUserId());
     } catch (BusinessValidationException exception) {

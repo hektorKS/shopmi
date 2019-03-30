@@ -9,8 +9,10 @@ import com.hektorks.user.common.passwordencryption.EncryptedPassword;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
@@ -22,18 +24,4 @@ public class User {
   private String email;
   private String phoneNumber;
   private String countryCode;
-
-  @Override
-  public String toString() {
-    return "User{" +
-        "id=" + id +
-        ", firstName='" + firstName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        ", username='" + username + '\'' +
-        ", encryptedPassword=" + encryptedPassword +
-        ", email='" + email + '\'' +
-        ", phoneNumber='" + (phoneNumber != null ? phoneNumber.replaceAll("\\d", "X") : null) + '\'' +
-        ", countryCode='" + countryCode + '\'' +
-        '}';
-  }
 }

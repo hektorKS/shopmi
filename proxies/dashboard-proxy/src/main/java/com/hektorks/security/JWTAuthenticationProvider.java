@@ -5,8 +5,6 @@
 
 package com.hektorks.security;
 
-import com.hektorks.security.JWTAuthenticationToken;
-import com.hektorks.security.JWTUserDetails;
 import com.hektorks.security.tokenservice.TokenService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;

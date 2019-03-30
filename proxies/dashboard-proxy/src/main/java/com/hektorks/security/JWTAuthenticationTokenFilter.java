@@ -5,7 +5,6 @@
 
 package com.hektorks.security;
 
-import com.hektorks.security.JWTAuthenticationToken;
 import com.hektorks.security.tokenservice.TokenService;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;

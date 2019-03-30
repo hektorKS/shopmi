@@ -9,8 +9,10 @@ import com.hektorks.user.common.User;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
+@ToString
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 class GetUserResponse {
   private final Integer id;

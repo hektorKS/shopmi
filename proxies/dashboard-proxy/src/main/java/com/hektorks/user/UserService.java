@@ -5,10 +5,13 @@
 
 package com.hektorks.user;
 
-import com.hektorks.user.dto.UserAuthenticationRequest;
+import com.hektorks.dashboard.common.AuthenticationCredentials;
+import com.hektorks.user.dto.GetUserByIdResponse;
 import com.hektorks.user.dto.UserAuthenticationResponse;
 
 
 public interface UserService {
-  UserAuthenticationResponse userAuthentication(UserAuthenticationRequest signInRequest);
+  UserAuthenticationResponse userAuthentication(AuthenticationCredentials signInRequest);
+
+  GetUserByIdResponse getUserById(Integer userId);
 }

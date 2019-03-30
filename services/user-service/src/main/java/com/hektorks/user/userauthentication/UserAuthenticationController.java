@@ -5,13 +5,9 @@
 
 package com.hektorks.user.userauthentication;
 
-import com.hektorks.exceptionhandling.BusinessValidationException;
-import com.hektorks.exceptionhandling.BusinessValidationExceptionMapper;
-import com.hektorks.exceptionhandling.CommandException;
 import com.hektorks.exceptionhandling.RequestValidationErrors;
-import com.hektorks.exceptionhandling.ResourceNotFoundException;
+import com.hektorks.exceptionhandling.RequestValidationException;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,17 +31,9 @@ class UserAuthenticationController {
       Errors errors
   ) {
     if (errors.hasErrors()) {
-      return ResponseEntity.badRequest().body(RequestValidationErrors.fromContextErrors(errors));
+      throw new RequestValidationException(RequestValidationErrors.fromContextErrors(errors));
     }
-    try {
-      Integer userId = userAuthenticationCommandBean.execute(userAuthenticationRequest);
-      return ResponseEntity.ok(new UserAuthenticationResponse(userId));
-    } catch (ResourceNotFoundException exception) {
-      return ResponseEntity.notFound().build();
-    } catch (BusinessValidationException exception) {
-      return ResponseEntity.unprocessableEntity().body(BusinessValidationExceptionMapper.toMap(exception));
-    } catch (CommandException exception) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
-    }
+    Integer userId = userAuthenticationCommandBean.execute(userAuthenticationRequest);
+    return ResponseEntity.ok(new UserAuthenticationResponse(userId));
   }
 }

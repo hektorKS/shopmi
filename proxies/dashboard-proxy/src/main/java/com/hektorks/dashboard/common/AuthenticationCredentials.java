@@ -3,14 +3,18 @@
  *
  */
 
-package com.hektorks.user.dto;
+package com.hektorks.dashboard.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
+import lombok.ToString.Exclude;
 
 @Data
+@ToString
 @AllArgsConstructor
-public class UserAuthenticationRequest {
+public class AuthenticationCredentials {
   private String username;
+  @Exclude
   private String password;
 }
