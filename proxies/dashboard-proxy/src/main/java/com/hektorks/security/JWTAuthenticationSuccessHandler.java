@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 class JWTAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-  private final static String USER_ID = "userId";
+  private static final String USER_ID = "userId";
 
   @Override
   public void onAuthenticationSuccess(

@@ -26,7 +26,7 @@ class TokenServiceImpl implements TokenService {
 
   private static final String BEARER = "Bearer ";
   private static final String EMPTY = "";
-  private final static String AUTHORIZATION_HEADER = "Authorization";
+  private static final String AUTHORIZATION_HEADER = "Authorization";
   private static final String USER_ID = "userId";
 
   @Override

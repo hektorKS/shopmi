@@ -11,6 +11,7 @@ import com.hektorks.user.dto.UserAuthenticationResponse;
 
 
 public interface UserService {
+
   UserAuthenticationResponse userAuthentication(AuthenticationCredentials signInRequest);
 
   GetUserByIdResponse getUserById(Integer userId);

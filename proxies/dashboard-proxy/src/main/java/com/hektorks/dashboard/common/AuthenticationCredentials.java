@@ -14,7 +14,7 @@ import lombok.ToString.Exclude;
 @ToString
 @AllArgsConstructor
 public class AuthenticationCredentials {
-  private String username;
+  private final String username;
   @Exclude
-  private String password;
+  private final String password;
 }

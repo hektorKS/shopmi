@@ -35,6 +35,12 @@ public class DashboardProxyExceptionHandler {
     return null;
   }
 
+  @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+  @ExceptionHandler(value = BusinessValidationException.class)
+  public Map<String, Object> handleException(BusinessValidationException exception) {
+    return BusinessValidationExceptionMapper.toMap(exception);
+  }
+
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   @ExceptionHandler(value = CommandException.class)
   public String handleException(CommandException exception) {

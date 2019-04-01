@@ -29,7 +29,7 @@ class UserServiceImpl implements UserService {
   private final DiscoveryClient discoveryClient;
   private final RestTemplate restTemplate;
 
-  private final static String USER_SERVICE = "user-service";
+  private static final String USER_SERVICE = "user-service";
 
   private Optional<URI> serviceUrl() {
     return discoveryClient.getInstances(USER_SERVICE)
@@ -66,6 +66,4 @@ class UserServiceImpl implements UserService {
       throw new UserServiceException(exception);
     }
   }
-
-
 }

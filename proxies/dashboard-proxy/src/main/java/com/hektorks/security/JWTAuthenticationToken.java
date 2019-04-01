@@ -12,7 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 @Data
 @EqualsAndHashCode(callSuper = true)
 class JWTAuthenticationToken extends UsernamePasswordAuthenticationToken {
-  private String token;
+  private final String token;
 
   JWTAuthenticationToken(String token) {
     super(null, null);

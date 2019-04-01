@@ -33,5 +33,4 @@ class GetUserProfileResponse {
         userProfile.getCountryCode()
     );
   }
-
 }
