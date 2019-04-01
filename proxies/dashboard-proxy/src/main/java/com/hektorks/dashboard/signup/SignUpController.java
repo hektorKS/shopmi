@@ -3,7 +3,7 @@
  *
  */
 
-package com.hektorks.dashboard.signin;
+package com.hektorks.dashboard.signup;
 
 import com.hektorks.exceptionhandling.RequestValidationErrors;
 import com.hektorks.exceptionhandling.RequestValidationException;
@@ -21,16 +21,16 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/v1/user")
 @AllArgsConstructor
-class SignInController {
+class SignUpController {
 
-  private final SignInCommandBean signInCommandBean;
+  private final SignUpCommandBean signUpCommandBean;
 
-  @PostMapping("/sign-in")
-  public ResponseEntity createUser(@Valid @RequestBody SignInRequest signInRequest, Errors errors) {
+  @PostMapping("/sign-up")
+  public ResponseEntity createUser(@Valid @RequestBody SignUpRequest signUpRequest, Errors errors) {
     if (errors.hasErrors()) {
       throw new RequestValidationException(RequestValidationErrors.fromContextErrors(errors));
     }
-    SignInResponse signInResponse = SignInResponse.create(signInCommandBean.execute(signInRequest));
+    SignUpResponse signInResponse = SignUpResponse.create(signUpCommandBean.execute(signUpRequest));
     return ResponseEntity.ok(signInResponse);
   }
 }

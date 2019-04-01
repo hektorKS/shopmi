@@ -25,14 +25,14 @@ class SignInCommandBeanImpl implements SignInCommandBean {
   private final UserService userService;
 
   @Override
-  public String execute(SignInRequest createUserRequest) {
+  public String execute(SignInRequest signInRequest) {
     try {
       UserAuthenticationResponse response = userService.userAuthentication(
-          new AuthenticationCredentials(createUserRequest.getUsername(), createUserRequest.getPassword())
+          new AuthenticationCredentials(signInRequest.getUsername(), signInRequest.getPassword())
       );
       return tokenService.createToken(response.getUserId());
     } catch (BusinessValidationException exception) {
-      throw new UserAuthenticationFailedException(createUserRequest.getUsername(), exception.getMessage());
+      throw new UserAuthenticationFailedException(signInRequest.getUsername(), exception.getMessage());
     } catch (ResourceNotFoundException | RequestValidationException exception) {
       throw exception;
     } catch (Exception exception) {

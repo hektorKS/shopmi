@@ -12,10 +12,7 @@ import lombok.ToString;
 @Data
 @ToString
 @AllArgsConstructor
-/*
- * This class will be extended with some additional data about User.
- */
-public class UserProfile {
+public class User {
   private final Integer id;
   private final String firstName;
   private final String lastName;

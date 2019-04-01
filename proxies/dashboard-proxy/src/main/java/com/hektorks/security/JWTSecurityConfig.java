@@ -34,8 +34,8 @@ class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
   private final AuthenticationManager authenticationManager;
   private final TokenService tokenService;
 
-  private static final String SIGN_UP_URL = "/api/v1/sign-up";
-  private static final String SIGN_IN_URL = "/api/v1/sign-in";
+  private static final String SIGN_UP_URL = "/api/v1/user/sign-up";
+  private static final String SIGN_IN_URL = "/api/v1/user/sign-in";
   private static final String USERNAME_AVAILABILITY_URL = "/api/v1/username/availability";
 
   @Override
