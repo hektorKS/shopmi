@@ -51,5 +51,4 @@ class JWTUserDetails implements UserDetails {
   public boolean isEnabled() {
     return true;
   }
-
 }

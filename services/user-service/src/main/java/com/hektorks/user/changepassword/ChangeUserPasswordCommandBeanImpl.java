@@ -54,6 +54,7 @@ class ChangeUserPasswordCommandBeanImpl implements ChangeUserPasswordCommandBean
           changeUserPasswordRequest.getUserId(),
           passwordEncryptionBean.encrypt(changeUserPasswordRequest.getNewPassword())
       ));
+      return null;
     } catch (ResourceNotFoundException exception) {
       throw exception;
     } catch (BusinessValidationException exception) {
@@ -63,6 +64,5 @@ class ChangeUserPasswordCommandBeanImpl implements ChangeUserPasswordCommandBean
       log.warn("Changing user password failed", exception);
       throw new ChangeUserPasswordCommandException(exception);
     }
-    return null;
   }
 }

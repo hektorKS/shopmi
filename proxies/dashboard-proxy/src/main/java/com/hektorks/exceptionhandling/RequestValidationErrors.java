@@ -26,9 +26,9 @@ public class RequestValidationErrors {
   private final int status;
   private final List<RequestValidationError> errors;
 
-  private final static String ERRORS = "errors";
-  private final static String FIELD = "field";
-  private final static String MESSAGE = "message";
+  private static final String ERRORS = "errors";
+  private static final String FIELD = "field";
+  private static final String MESSAGE = "message";
 
   public static RequestValidationErrors fromContextErrors(Errors errors) {
     return new RequestValidationErrors(

@@ -6,8 +6,11 @@
 package com.hektorks.user;
 
 import com.hektorks.dashboard.common.AuthenticationCredentials;
+import com.hektorks.dashboard.signup.SignUpRequest;
+import com.hektorks.user.dto.CreateUserResponse;
 import com.hektorks.user.dto.GetUserByIdResponse;
 import com.hektorks.user.dto.UserAuthenticationResponse;
+import com.hektorks.user.dto.mappers.CreateUserResponseMapper;
 import com.hektorks.user.dto.mappers.GetUserResponseMapper;
 import com.hektorks.user.dto.mappers.UserAuthenticationResponseMapper;
 import com.hektorks.user.exceptions.UserServiceException;
@@ -29,7 +32,7 @@ class UserServiceImpl implements UserService {
   private final DiscoveryClient discoveryClient;
   private final RestTemplate restTemplate;
 
-  private final static String USER_SERVICE = "user-service";
+  private static final String USER_SERVICE = "user-service";
 
   private Optional<URI> serviceUrl() {
     return discoveryClient.getInstances(USER_SERVICE)
@@ -53,6 +56,24 @@ class UserServiceImpl implements UserService {
   }
 
   @Override
+  public CreateUserResponse createUser(SignUpRequest signUpRequest) {
+    try {
+      URI serviceURI = serviceUrl()
+          .map(service -> service.resolve("/v1/user"))
+          .orElseThrow(ServiceUnavailableException::new);
+      ResponseEntity<String> responseEntity = restTemplate.postForEntity(
+          serviceURI,
+          signUpRequest,
+          String.class
+      );
+      return CreateUserResponseMapper.fromJson(responseEntity.getBody());
+    } catch (ServiceUnavailableException exception) {
+      log.warn("Communication with user service failed.", exception);
+      throw new UserServiceException(exception);
+    }
+  }
+
+  @Override
   public GetUserByIdResponse getUserById(Integer userId) {
     try {
       String path = "/v1/user/" + userId.toString();
@@ -66,6 +87,4 @@ class UserServiceImpl implements UserService {
       throw new UserServiceException(exception);
     }
   }
-
-
 }

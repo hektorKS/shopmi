@@ -17,7 +17,7 @@ import lombok.ToString.Exclude;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 class SignInResponse {
   @Exclude
-  private String token;
+  private final String token;
 
   static SignInResponse create(String token) {
     return new SignInResponse(token);

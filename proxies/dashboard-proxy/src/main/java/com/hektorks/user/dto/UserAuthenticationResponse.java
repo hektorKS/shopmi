@@ -11,5 +11,5 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class UserAuthenticationResponse {
-  private Integer userId;
+  private final Integer userId;
 }

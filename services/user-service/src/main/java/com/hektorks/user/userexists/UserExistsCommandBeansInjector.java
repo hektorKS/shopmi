@@ -31,5 +31,4 @@ class UserExistsCommandBeansInjector {
     return new UserExistsByEmailCommandBeanImpl(usersRepository);
   }
 
-
 }

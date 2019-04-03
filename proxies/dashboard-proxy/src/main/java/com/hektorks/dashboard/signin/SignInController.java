@@ -19,7 +19,7 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/user")
 @AllArgsConstructor
 class SignInController {
 
