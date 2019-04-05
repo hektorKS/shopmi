@@ -3,22 +3,24 @@
  *
  */
 
-package com.hektorks.user.common.repository.dao;
+package com.hektorks.user.common.model;
 
+import com.hektorks.user.common.passwordencryption.EncryptedPassword;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@Builder
 @ToString
+@NoArgsConstructor
 @AllArgsConstructor
-public class UserDataDao {
+public class User {
   private Integer id;
   private String firstName;
   private String lastName;
   private String username;
+  private EncryptedPassword encryptedPassword;
   private String email;
   private String phoneNumber;
   private String countryCode;

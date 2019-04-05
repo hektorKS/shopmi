@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1")
 @AllArgsConstructor
 class GetUserProfileController {
 
   private final GetUserProfileCommandBean getUserProfileCommandBean;
 
-  @GetMapping("/profile")
+  @GetMapping("/user/profile")
   public ResponseEntity getUserProfile(@RequestAttribute Integer userId) {
     GetUserProfileResponse getUserProfileResponse = GetUserProfileResponse.create(getUserProfileCommandBean.execute(userId));
     return ResponseEntity.ok(getUserProfileResponse);

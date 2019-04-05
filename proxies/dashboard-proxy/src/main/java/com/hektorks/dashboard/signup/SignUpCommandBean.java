@@ -6,7 +6,7 @@
 package com.hektorks.dashboard.signup;
 
 import com.hektorks.dashboard.common.CommandBean;
-import com.hektorks.dashboard.common.UserToken;
+import com.hektorks.dashboard.common.model.UserToken;
 
 interface SignUpCommandBean extends CommandBean<UserToken, SignUpRequest> {
   @Override

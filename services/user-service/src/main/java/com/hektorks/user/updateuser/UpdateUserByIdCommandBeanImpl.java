@@ -7,9 +7,9 @@ package com.hektorks.user.updateuser;
 
 import com.hektorks.exceptionhandling.BusinessValidationException;
 import com.hektorks.exceptionhandling.ResourceNotFoundException;
-import com.hektorks.user.common.User;
+import com.hektorks.user.common.model.User;
 import com.hektorks.user.common.repository.UsersRepository;
-import com.hektorks.user.common.repository.dao.UserDataDao;
+import com.hektorks.user.common.model.UserData;
 import com.hektorks.user.createuser.exceptions.EmailAlreadyUsedException;
 import com.hektorks.user.createuser.exceptions.UsernameExistsException;
 import com.hektorks.user.getuserbyid.GetUserByIdCommandBean;
@@ -63,7 +63,7 @@ class UpdateUserByIdCommandBeanImpl implements UpdateUserByIdCommandBean {
         throw new EmailAlreadyUsedException(email);
       }
 
-      usersRepository.updateUserData(new UserDataDao(
+      usersRepository.updateUserData(new UserData(
           updateUserRequest.getUserId(),
           updateUserRequest.getFirstName(),
           updateUserRequest.getLastName(),

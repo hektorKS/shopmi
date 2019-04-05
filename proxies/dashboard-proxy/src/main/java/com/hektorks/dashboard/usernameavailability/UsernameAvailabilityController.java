@@ -3,7 +3,7 @@
  *
  */
 
-package com.hektorks.user.userauthentication;
+package com.hektorks.dashboard.usernameavailability;
 
 import com.hektorks.exceptionhandling.RequestValidationErrors;
 import com.hektorks.exceptionhandling.RequestValidationException;
@@ -19,21 +19,23 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/api/v1")
 @AllArgsConstructor
-class UserAuthenticationController {
+class UsernameAvailabilityController {
 
-  private final UserAuthenticationCommandBean userAuthenticationCommandBean;
+  private final UsernameAvailabilityCommandBean usernameAvailabilityCommandBean;
 
-  @PostMapping("/user/authentication")
-  public ResponseEntity createUser(
-      @Valid @RequestBody UserAuthenticationRequest userAuthenticationRequest,
+  @PostMapping("/username/availability")
+  public ResponseEntity checkUsernameAvailability(
+      @Valid @RequestBody UsernameAvailabilityRequest usernameAvailabilityRequest,
       Errors errors
   ) {
     if (errors.hasErrors()) {
       throw new RequestValidationException(RequestValidationErrors.fromContextErrors(errors));
     }
-    Integer userId = userAuthenticationCommandBean.execute(userAuthenticationRequest);
-    return ResponseEntity.ok(UserAuthenticationResponse.create(userId));
+    UsernameAvailabilityResponse signInResponse = UsernameAvailabilityResponse.create(
+        usernameAvailabilityCommandBean.execute(usernameAvailabilityRequest)
+    );
+    return ResponseEntity.ok(signInResponse);
   }
 }

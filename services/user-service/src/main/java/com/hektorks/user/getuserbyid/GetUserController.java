@@ -5,7 +5,7 @@
 
 package com.hektorks.user.getuserbyid;
 
-import com.hektorks.user.common.User;
+import com.hektorks.user.common.model.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

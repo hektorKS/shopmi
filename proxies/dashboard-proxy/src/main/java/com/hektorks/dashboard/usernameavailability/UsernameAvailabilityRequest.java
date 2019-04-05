@@ -3,21 +3,16 @@
  *
  */
 
-package com.hektorks.dashboard.signin;
+package com.hektorks.dashboard.usernameavailability;
 
 import lombok.Data;
 import lombok.ToString;
-import lombok.ToString.Exclude;
 
 import javax.validation.constraints.NotNull;
 
-
 @Data
 @ToString
-public class SignInRequest {
+public class UsernameAvailabilityRequest {
   @NotNull(message = "Mandatory field username missing.")
   private String username;
-  @NotNull(message = "Mandatory field password missing.")
-  @Exclude
-  private String password;
 }

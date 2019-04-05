@@ -6,9 +6,9 @@
 package com.hektorks.user.common.repository;
 
 import com.hektorks.exceptionhandling.RepositoryException;
-import com.hektorks.user.common.User;
-import com.hektorks.user.common.repository.dao.UserDataDao;
-import com.hektorks.user.common.repository.dao.UserPasswordDao;
+import com.hektorks.user.common.model.User;
+import com.hektorks.user.common.model.UserData;
+import com.hektorks.user.common.model.UserPassword;
 import com.hektorks.user.common.repository.mappers.UsersModificationMapper;
 import com.hektorks.user.common.repository.mappers.UsersSelectionMapper;
 import lombok.AllArgsConstructor;
@@ -36,23 +36,23 @@ class UsersRepositoryImpl implements UsersRepository {
   }
 
   @Override
-  public void updateUserData(UserDataDao userDataDao) {
+  public void updateUserData(UserData userData) {
     try {
       UsersModificationMapper usersModificationMapper = sqlSessionTemplate.getMapper(UsersModificationMapper.class);
-      usersModificationMapper.updateUserData(userDataDao);
+      usersModificationMapper.updateUserData(userData);
     } catch (Exception exception) {
-      log.warn("Updating user data failed [{}].", userDataDao, exception);
+      log.warn("Updating user data failed [{}].", userData, exception);
       throw new RepositoryException(exception);
     }
   }
 
   @Override
-  public void updateUserPassword(UserPasswordDao userPasswordDao) {
+  public void updateUserPassword(UserPassword userPassword) {
     try {
       UsersModificationMapper usersModificationMapper = sqlSessionTemplate.getMapper(UsersModificationMapper.class);
-      usersModificationMapper.updateUserPassword(userPasswordDao);
+      usersModificationMapper.updateUserPassword(userPassword);
     } catch (Exception exception) {
-      log.warn("Updating user password failed [{}].", userPasswordDao, exception);
+      log.warn("Updating user password failed [{}].", userPassword, exception);
       throw new RepositoryException(exception);
     }
   }

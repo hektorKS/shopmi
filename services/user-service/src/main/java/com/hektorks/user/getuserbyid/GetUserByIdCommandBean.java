@@ -6,7 +6,7 @@
 package com.hektorks.user.getuserbyid;
 
 import com.hektorks.user.common.CommandBean;
-import com.hektorks.user.common.User;
+import com.hektorks.user.common.model.User;
 
 public interface GetUserByIdCommandBean extends CommandBean<User, Integer> {
   @Override

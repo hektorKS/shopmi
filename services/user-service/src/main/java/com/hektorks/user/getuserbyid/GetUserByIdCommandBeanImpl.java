@@ -5,7 +5,7 @@
 
 package com.hektorks.user.getuserbyid;
 
-import com.hektorks.user.common.User;
+import com.hektorks.user.common.model.User;
 import com.hektorks.user.common.repository.UsersRepository;
 import com.hektorks.user.getuserbyid.exceptions.GetUserByIdCommandException;
 import lombok.AllArgsConstructor;

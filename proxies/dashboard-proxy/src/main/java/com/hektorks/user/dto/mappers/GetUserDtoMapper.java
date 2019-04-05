@@ -5,14 +5,14 @@
 
 package com.hektorks.user.dto.mappers;
 
-import com.hektorks.user.dto.GetUserByIdResponse;
+import com.hektorks.user.dto.GetUserByIdDto;
 import com.hektorks.user.exceptions.MapperException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 
 @Slf4j
-public class GetUserResponseMapper {
+public class GetUserDtoMapper {
   private static final String ID = "id";
   private static final String FIRST_NAME = "firstName";
   private static final String LAST_NAME = "lastName";
@@ -21,10 +21,10 @@ public class GetUserResponseMapper {
   private static final String PHONE_NUMBER = "phoneNumber";
   private static final String COUNTRY_CODE = "countryCode";
 
-  public static GetUserByIdResponse fromJson(String jsonBody) {
+  public static GetUserByIdDto fromJson(String jsonBody) {
     try {
       JSONObject jsonObject = new JSONObject(jsonBody);
-      return new GetUserByIdResponse(
+      return new GetUserByIdDto(
           jsonObject.getInt(ID),
           jsonObject.getString(FIRST_NAME),
           jsonObject.getString(LAST_NAME),

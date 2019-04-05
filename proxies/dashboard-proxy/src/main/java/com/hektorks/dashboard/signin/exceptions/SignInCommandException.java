@@ -9,6 +9,6 @@ import com.hektorks.exceptionhandling.CommandException;
 
 public class SignInCommandException extends CommandException {
   public SignInCommandException(Throwable cause) {
-    super("User sign-in failed.", cause);
+    super("User sign in failed.", cause);
   }
 }

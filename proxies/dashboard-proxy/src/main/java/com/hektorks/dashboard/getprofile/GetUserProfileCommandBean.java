@@ -6,7 +6,7 @@
 package com.hektorks.dashboard.getprofile;
 
 import com.hektorks.dashboard.common.CommandBean;
-import com.hektorks.dashboard.common.UserProfile;
+import com.hektorks.dashboard.common.model.UserProfile;
 
 interface GetUserProfileCommandBean extends CommandBean<UserProfile, Integer> {
   @Override

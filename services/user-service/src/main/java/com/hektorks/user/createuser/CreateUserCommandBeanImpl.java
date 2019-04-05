@@ -6,7 +6,7 @@
 package com.hektorks.user.createuser;
 
 import com.hektorks.exceptionhandling.BusinessValidationException;
-import com.hektorks.user.common.User;
+import com.hektorks.user.common.model.User;
 import com.hektorks.user.common.passwordencryption.PasswordEncryptionBean;
 import com.hektorks.user.common.repository.UsersRepository;
 import com.hektorks.user.createuser.exceptions.CreateUserCommandException;

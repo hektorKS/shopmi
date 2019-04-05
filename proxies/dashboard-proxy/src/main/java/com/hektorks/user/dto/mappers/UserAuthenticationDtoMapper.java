@@ -5,22 +5,21 @@
 
 package com.hektorks.user.dto.mappers;
 
-import com.hektorks.user.dto.CreateUserResponse;
+import com.hektorks.user.dto.UserAuthenticationDto;
 import com.hektorks.user.exceptions.MapperException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 
 @Slf4j
-public class CreateUserResponseMapper {
+public class UserAuthenticationDtoMapper {
+
   private static final String USER_ID = "userId";
 
-  public static CreateUserResponse fromJson(String jsonBody) {
+  public static UserAuthenticationDto fromJson(String jsonBody) {
     try {
       JSONObject jsonObject = new JSONObject(jsonBody);
-      return new CreateUserResponse(
-          jsonObject.getInt(USER_ID)
-      );
+      return new UserAuthenticationDto(jsonObject.getInt(USER_ID));
     } catch (JSONException exception) {
       log.warn("Mapping from json body [{}] failed.", jsonBody, exception);
       throw new MapperException(jsonBody, exception);

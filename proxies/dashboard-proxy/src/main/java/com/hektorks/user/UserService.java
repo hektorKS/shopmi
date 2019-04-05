@@ -5,18 +5,22 @@
 
 package com.hektorks.user;
 
-import com.hektorks.dashboard.common.AuthenticationCredentials;
+import com.hektorks.dashboard.signin.SignInRequest;
 import com.hektorks.dashboard.signup.SignUpRequest;
-import com.hektorks.user.dto.CreateUserResponse;
-import com.hektorks.user.dto.GetUserByIdResponse;
-import com.hektorks.user.dto.UserAuthenticationResponse;
+import com.hektorks.dashboard.usernameavailability.UsernameAvailabilityRequest;
+import com.hektorks.user.dto.CreateUserDto;
+import com.hektorks.user.dto.GetUserByIdDto;
+import com.hektorks.user.dto.UserAuthenticationDto;
+import com.hektorks.user.dto.UsernameAvailabilityDto;
 
 
 public interface UserService {
 
-  UserAuthenticationResponse userAuthentication(AuthenticationCredentials signInRequest);
+  UserAuthenticationDto userAuthentication(SignInRequest signInRequest);
 
-  CreateUserResponse createUser(SignUpRequest signUpRequest);
+  UsernameAvailabilityDto checkUsernameAvailability(UsernameAvailabilityRequest username);
 
-  GetUserByIdResponse getUserById(Integer userId);
+  CreateUserDto createUser(SignUpRequest signUpRequest);
+
+  GetUserByIdDto getUserById(Integer userId);
 }

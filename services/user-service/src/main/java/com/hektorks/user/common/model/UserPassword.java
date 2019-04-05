@@ -3,7 +3,7 @@
  *
  */
 
-package com.hektorks.user.common.repository.dao;
+package com.hektorks.user.common.model;
 
 import com.hektorks.user.common.passwordencryption.EncryptedPassword;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import lombok.ToString;
 @Data
 @ToString
 @AllArgsConstructor
-public class UserPasswordDao {
+public class UserPassword {
   private Integer id;
   private EncryptedPassword encryptedPassword;
 }

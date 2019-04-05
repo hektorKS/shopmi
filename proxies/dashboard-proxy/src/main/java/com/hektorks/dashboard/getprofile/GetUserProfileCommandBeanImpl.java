@@ -5,10 +5,10 @@
 
 package com.hektorks.dashboard.getprofile;
 
-import com.hektorks.dashboard.common.UserProfile;
-import com.hektorks.dashboard.signin.exceptions.SignInCommandException;
+import com.hektorks.dashboard.common.model.UserProfile;
+import com.hektorks.dashboard.getprofile.exceptions.GetUserProfileCommandException;
 import com.hektorks.user.UserService;
-import com.hektorks.user.dto.GetUserByIdResponse;
+import com.hektorks.user.dto.GetUserByIdDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,19 +21,19 @@ class GetUserProfileCommandBeanImpl implements GetUserProfileCommandBean {
   @Override
   public UserProfile execute(Integer userId) {
     try {
-      GetUserByIdResponse getUserByIdResponse = userService.getUserById(userId);
+      GetUserByIdDto getUserByIdDto = userService.getUserById(userId);
       return new UserProfile(
-          getUserByIdResponse.getId(),
-          getUserByIdResponse.getFirstName(),
-          getUserByIdResponse.getLastName(),
-          getUserByIdResponse.getUsername(),
-          getUserByIdResponse.getEmail(),
-          getUserByIdResponse.getPhoneNumber(),
-          getUserByIdResponse.getCountryCode()
+          getUserByIdDto.getId(),
+          getUserByIdDto.getFirstName(),
+          getUserByIdDto.getLastName(),
+          getUserByIdDto.getUsername(),
+          getUserByIdDto.getEmail(),
+          getUserByIdDto.getPhoneNumber(),
+          getUserByIdDto.getCountryCode()
       );
     } catch (Exception exception) {
       log.warn("Getting user by id [{}] failed", userId, exception);
-      throw new SignInCommandException(exception);
+      throw new GetUserProfileCommandException(userId,  exception);
     }
   }
 }

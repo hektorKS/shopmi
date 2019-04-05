@@ -5,7 +5,6 @@
 
 package com.hektorks.dashboard.signin;
 
-import com.hektorks.dashboard.common.AuthenticationCredentials;
 import com.hektorks.dashboard.signin.exceptions.SignInCommandException;
 import com.hektorks.exceptionhandling.BusinessValidationException;
 import com.hektorks.exceptionhandling.RequestValidationException;
@@ -13,7 +12,7 @@ import com.hektorks.exceptionhandling.ResourceNotFoundException;
 import com.hektorks.exceptionhandling.UserAuthenticationFailedException;
 import com.hektorks.security.tokenservice.TokenService;
 import com.hektorks.user.UserService;
-import com.hektorks.user.dto.UserAuthenticationResponse;
+import com.hektorks.user.dto.UserAuthenticationDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,9 +26,7 @@ class SignInCommandBeanImpl implements SignInCommandBean {
   @Override
   public String execute(SignInRequest signInRequest) {
     try {
-      UserAuthenticationResponse response = userService.userAuthentication(
-          new AuthenticationCredentials(signInRequest.getUsername(), signInRequest.getPassword())
-      );
+      UserAuthenticationDto response = userService.userAuthentication(signInRequest);
       return tokenService.createToken(response.getUserId());
     } catch (BusinessValidationException exception) {
       throw new UserAuthenticationFailedException(signInRequest.getUsername(), exception.getMessage());
