@@ -7,7 +7,7 @@ package com.hektorks.dashboard.signup;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.hektorks.dashboard.common.UserToken;
+import com.hektorks.dashboard.common.model.UserToken;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

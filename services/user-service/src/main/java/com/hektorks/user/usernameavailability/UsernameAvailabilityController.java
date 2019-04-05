@@ -27,14 +27,15 @@ class UsernameAvailabilityController {
   private final UsernameAvailabilityCommandBean usernameAvailabilityCommandBean;
 
   @PostMapping("/user/username/availability")
-  ResponseEntity checkUsernameAvailability(@Valid @RequestBody UsernameAvailabilityRequest usernameAvailabilityRequest,
-                                           Errors errors
+  ResponseEntity checkUsernameAvailability(
+      @Valid @RequestBody UsernameAvailabilityRequest usernameAvailabilityRequest,
+      Errors errors
   ) {
     if (errors.hasErrors()) {
       throw new RequestValidationException(RequestValidationErrors.fromContextErrors(errors));
     }
     String username = usernameAvailabilityRequest.getUsername();
-    boolean isUsernameTaken = usernameAvailabilityCommandBean.execute(username);
-    return ResponseEntity.ok(new UsernameAvailabilityResponse(username, isUsernameTaken));
+    boolean isAvailable = usernameAvailabilityCommandBean.execute(username);
+    return ResponseEntity.ok(UsernameAvailabilityResponse.create(username, isAvailable));
   }
 }

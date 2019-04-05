@@ -5,17 +5,17 @@
 
 package com.hektorks.user.common.repository;
 
-import com.hektorks.user.common.User;
-import com.hektorks.user.common.repository.dao.UserDataDao;
-import com.hektorks.user.common.repository.dao.UserPasswordDao;
+import com.hektorks.user.common.model.User;
+import com.hektorks.user.common.model.UserData;
+import com.hektorks.user.common.model.UserPassword;
 
 public interface UsersRepository {
 
   Integer createUser(User user);
 
-  void updateUserData(UserDataDao userDataDao);
+  void updateUserData(UserData userData);
 
-  void updateUserPassword(UserPasswordDao userPasswordDao);
+  void updateUserPassword(UserPassword userPassword);
 
   User getUserById(Integer id);
 

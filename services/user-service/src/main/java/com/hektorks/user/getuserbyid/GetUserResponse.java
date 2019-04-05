@@ -5,7 +5,7 @@
 
 package com.hektorks.user.getuserbyid;
 
-import com.hektorks.user.common.User;
+import com.hektorks.user.common.model.User;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

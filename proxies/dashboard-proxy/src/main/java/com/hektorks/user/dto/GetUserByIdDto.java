@@ -3,16 +3,14 @@
  *
  */
 
-package com.hektorks.dashboard.common;
+package com.hektorks.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.ToString;
 
 @Data
-@ToString
 @AllArgsConstructor
-public class User {
+public class GetUserByIdDto {
   private final Integer id;
   private final String firstName;
   private final String lastName;

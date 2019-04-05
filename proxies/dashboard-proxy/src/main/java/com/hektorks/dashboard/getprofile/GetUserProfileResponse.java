@@ -5,7 +5,7 @@
 
 package com.hektorks.dashboard.getprofile;
 
-import com.hektorks.dashboard.common.UserProfile;
+import com.hektorks.dashboard.common.model.UserProfile;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

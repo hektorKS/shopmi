@@ -10,6 +10,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserAuthenticationResponse {
+public class UserAuthenticationDto {
   private final Integer userId;
 }

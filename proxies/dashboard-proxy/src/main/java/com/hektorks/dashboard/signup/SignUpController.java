@@ -19,13 +19,13 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1")
 @AllArgsConstructor
 class SignUpController {
 
   private final SignUpCommandBean signUpCommandBean;
 
-  @PostMapping("/sign-up")
+  @PostMapping("/user/sign-up")
   public ResponseEntity createUser(@Valid @RequestBody SignUpRequest signUpRequest, Errors errors) {
     if (errors.hasErrors()) {
       throw new RequestValidationException(RequestValidationErrors.fromContextErrors(errors));

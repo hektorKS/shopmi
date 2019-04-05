@@ -3,14 +3,14 @@
  *
  */
 
-package com.hektorks.dashboard.common;
+package com.hektorks.dashboard.common.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserToken {
-  private final Integer userId;
-  private final String token;
+public class UsernameAvailability {
+  private final String username;
+  private final boolean isAvailable;
 }

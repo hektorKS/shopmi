@@ -5,7 +5,7 @@
 
 package com.hektorks.user.common.repository.mappers;
 
-import com.hektorks.user.common.User;
+import com.hektorks.user.common.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

@@ -7,7 +7,7 @@ package com.hektorks.user.userauthentication;
 
 import com.hektorks.exceptionhandling.BusinessValidationException;
 import com.hektorks.exceptionhandling.ResourceNotFoundException;
-import com.hektorks.user.common.User;
+import com.hektorks.user.common.model.User;
 import com.hektorks.user.common.passwordencryption.PasswordEncryptionBean;
 import com.hektorks.user.common.repository.UsersRepository;
 import com.hektorks.user.common.validation.UsernameBusinessValidatorBean;

@@ -5,6 +5,7 @@
 
 package com.hektorks.user.usernameavailability;
 
+import com.hektorks.exceptionhandling.BusinessValidationException;
 import com.hektorks.user.common.validation.UsernameBusinessValidatorBean;
 import com.hektorks.user.userexists.UserExistsByUsernameCommandBean;
 import com.hektorks.user.usernameavailability.exceptions.UsernameAvailabilityCommandException;
@@ -23,6 +24,9 @@ class UsernameAvailabilityCommandBeanImpl implements UsernameAvailabilityCommand
     try {
       usernameBusinessValidatorBean.validate(username);
       return !(userExistsByUsernameCommandBean.execute(username));
+    } catch (BusinessValidationException exception) {
+      log.info("Business validation failed for checking username [{}] availability.", username);
+      throw exception;
     } catch (Exception exception) {
       log.warn("Checking username availability [{}] failed", username, exception);
       throw new UsernameAvailabilityCommandException(username, exception);
