@@ -6,7 +6,7 @@
 package com.hektorks.dashboard.getprofile;
 
 import com.hektorks.dashboard.common.UserProfile;
-import com.hektorks.dashboard.signin.exceptions.SignInCommandException;
+import com.hektorks.dashboard.getprofile.exceptions.GetUserProfileCommandException;
 import com.hektorks.user.UserService;
 import com.hektorks.user.dto.GetUserByIdResponse;
 import lombok.AllArgsConstructor;
@@ -33,7 +33,7 @@ class GetUserProfileCommandBeanImpl implements GetUserProfileCommandBean {
       );
     } catch (Exception exception) {
       log.warn("Getting user by id [{}] failed", userId, exception);
-      throw new SignInCommandException(exception);
+      throw new GetUserProfileCommandException(userId,  exception);
     }
   }
 }

@@ -6,7 +6,7 @@
 package com.hektorks.dashboard.signup;
 
 import com.hektorks.dashboard.common.UserToken;
-import com.hektorks.dashboard.signin.exceptions.SignInCommandException;
+import com.hektorks.dashboard.signup.exceptions.SignUpCommandException;
 import com.hektorks.exceptionhandling.BusinessValidationException;
 import com.hektorks.exceptionhandling.RequestValidationException;
 import com.hektorks.security.tokenservice.TokenService;
@@ -30,8 +30,8 @@ class SignUpCommandBeanImpl implements SignUpCommandBean {
     } catch (BusinessValidationException | RequestValidationException exception) {
       throw exception;
     } catch (Exception exception) {
-      log.warn("User sign in failed", exception);
-      throw new SignInCommandException(exception);
+      log.warn("User sign up failed", exception);
+      throw new SignUpCommandException(exception);
     }
   }
 }
