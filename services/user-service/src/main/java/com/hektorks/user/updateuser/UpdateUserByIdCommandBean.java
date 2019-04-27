@@ -5,9 +5,6 @@
 
 package com.hektorks.user.updateuser;
 
-import com.hektorks.user.common.CommandBean;
-
-interface UpdateUserByIdCommandBean extends CommandBean<Void, UpdateUserRequest> {
-  @Override
-  Void execute(UpdateUserRequest data);
+interface UpdateUserByIdCommandBean {
+  Void execute(UpdateUserRequest data, Integer userId);
 }

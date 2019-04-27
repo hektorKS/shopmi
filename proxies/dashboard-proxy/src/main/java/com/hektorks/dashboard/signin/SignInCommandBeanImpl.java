@@ -33,7 +33,7 @@ class SignInCommandBeanImpl implements SignInCommandBean {
     } catch (ResourceNotFoundException | RequestValidationException exception) {
       throw exception;
     } catch (Exception exception) {
-      log.warn("User sign in failed", exception);
+      log.warn("User sign-in failed", exception);
       throw new SignInCommandException(exception);
     }
   }

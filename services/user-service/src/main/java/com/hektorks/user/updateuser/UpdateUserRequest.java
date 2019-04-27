@@ -13,8 +13,6 @@ import javax.validation.constraints.Null;
 @Data
 @ToString
 class UpdateUserRequest {
-  @Null(message = "Field userId must be null.")
-  private Integer userId;
   private String firstName;
   private String lastName;
   private String username;

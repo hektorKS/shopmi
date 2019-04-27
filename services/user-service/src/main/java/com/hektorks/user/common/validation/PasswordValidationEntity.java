@@ -7,26 +7,18 @@ package com.hektorks.user.common.validation;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
+import lombok.ToString.Exclude;
 
 @Data
+@ToString
 @AllArgsConstructor
 public class PasswordValidationEntity {
+  @Exclude
   private final String password;
   private final String firstName;
   private final String lastName;
   private final String username;
   private final String email;
   private final String phoneNumber;
-
-  @Override
-  public String toString() {
-    return "PasswordValidationEntity{" +
-        "password='" + "XXX" + '\'' +
-        ", firstName='" + firstName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        ", username='" + username + '\'' +
-        ", email='" + email + '\'' +
-        ", phoneNumber='" + (phoneNumber != null ? phoneNumber.replaceAll("\\d", "X") : null) + '\'' +
-        '}';
-  }
 }

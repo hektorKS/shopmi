@@ -6,7 +6,6 @@
 package com.hektorks.user.updateuser;
 
 
-import com.hektorks.user.common.validation.ApplicableBusinessValidatorBean;
 import com.hektorks.user.common.validation.CountryCodeBusinessValidatorBean;
 import com.hektorks.user.common.validation.EmailBusinessValidatorBean;
 import com.hektorks.user.common.validation.FirstNameBusinessValidatorBean;
@@ -27,17 +26,11 @@ class UpdateUserRequestValidatorBeanImpl implements UpdateUserRequestValidatorBe
 
   @Override
   public void validate(UpdateUserRequest updateUserRequest) {
-    validate(updateUserRequest.getFirstName(), firstNameValidatorBean);
-    validate(updateUserRequest.getLastName(), lastNameValidatorBean);
-    validate(updateUserRequest.getUsername(), usernameValidatorBean);
-    validate(updateUserRequest.getEmail(), emailValidatorBean);
-    validate(updateUserRequest.getPhoneNumber(), phoneNumberValidatorBean);
-    validate(updateUserRequest.getCountryCode(), countryCodeValidatorBean);
-  }
-
-  private void validate(String field, ApplicableBusinessValidatorBean<String> applicableBusinessValidatorBean) {
-    if (applicableBusinessValidatorBean.isApplicable(field)) {
-      applicableBusinessValidatorBean.validate(field);
-    }
+    firstNameValidatorBean.validate(updateUserRequest.getFirstName());
+    lastNameValidatorBean.validate(updateUserRequest.getLastName());
+    usernameValidatorBean.validate(updateUserRequest.getUsername());
+    emailValidatorBean.validate(updateUserRequest.getEmail());
+    phoneNumberValidatorBean.validate(updateUserRequest.getPhoneNumber());
+    countryCodeValidatorBean.validate(updateUserRequest.getCountryCode());
   }
 }

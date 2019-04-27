@@ -17,8 +17,8 @@ class UserExistsCommandBeansInjector {
   private final UsersRepository usersRepository;
 
   @Bean
-  UserExistsCommandBean getUserExistsCommandBean() {
-    return new UserExistsCommandBeanImpl(usersRepository);
+  UserExistsByIdCommandBean getUserExistsCommandBean() {
+    return new UserExistsByIdCommandBeanImpl(usersRepository);
   }
 
   @Bean
