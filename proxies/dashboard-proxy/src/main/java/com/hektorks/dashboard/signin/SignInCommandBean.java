@@ -5,9 +5,6 @@
 
 package com.hektorks.dashboard.signin;
 
-import com.hektorks.dashboard.common.CommandBean;
-
-interface SignInCommandBean extends CommandBean<String, SignInRequest> {
-  @Override
+interface SignInCommandBean {
   String execute(SignInRequest createUserRequest);
 }

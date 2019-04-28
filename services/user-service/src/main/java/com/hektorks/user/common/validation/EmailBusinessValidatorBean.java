@@ -5,10 +5,28 @@
 
 package com.hektorks.user.common.validation;
 
-public interface EmailBusinessValidatorBean extends ApplicableBusinessValidatorBean<String> {
-  @Override
-  boolean isApplicable(String data);
+import com.hektorks.exceptionhandling.BusinessValidationException;
+
+public class EmailBusinessValidatorBean extends BusinessValidatorTemplateBean<String> {
+
+  private static final String EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
 
   @Override
-  void validate(String data);
+  boolean appliesTo(String email) {
+    return email != null;
+  }
+
+  @Override
+  void process(String email) {
+    if (!isValidPattern(email)) {
+      throw new BusinessValidationException(
+          "Email must match pattern " + EMAIL_PATTERN + ".",
+          "firstName"
+      );
+    }
+  }
+
+  private boolean isValidPattern(String email) {
+    return email.matches(EMAIL_PATTERN);
+  }
 }

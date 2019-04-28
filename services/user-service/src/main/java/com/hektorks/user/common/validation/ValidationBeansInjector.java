@@ -13,37 +13,37 @@ class ValidationBeansInjector {
 
   @Bean
   FirstNameBusinessValidatorBean getFirstNameValidatorBean() {
-    return new FirstNameBusinessValidatorBeanImpl();
+    return new FirstNameBusinessValidatorBean();
   }
 
   @Bean
   LastNameBusinessValidatorBean getLastNameValidatorBean() {
-    return new LastNameBusinessValidatorBeanImpl();
+    return new LastNameBusinessValidatorBean();
   }
 
   @Bean
   UsernameBusinessValidatorBean getUsernameValidatorBean() {
-    return new UsernameBusinessValidatorBeanImpl();
+    return new UsernameBusinessValidatorBean();
   }
 
   @Bean
   EmailBusinessValidatorBean getEmailValidatorBean() {
-    return new EmailBusinessValidatorBeanImpl();
+    return new EmailBusinessValidatorBean();
   }
 
   @Bean
   PasswordBusinessValidatorBean getPasswordValidatorBean() {
-    return new PasswordBusinessValidatorBeanImpl();
+    return new PasswordBusinessValidatorBean();
   }
 
   @Bean
   PhoneNumberBusinessValidatorBean getPhoneNumberValidatorBean() {
-    return new PhoneNumberBusinessValidatorBeanImpl();
+    return new PhoneNumberBusinessValidatorBean();
   }
 
   @Bean
   CountryCodeBusinessValidatorBean getCountryCodeValidatorBean() {
-    return new CountryCodeBusinessValidatorBeanImpl();
+    return new CountryCodeBusinessValidatorBean();
   }
 
 }

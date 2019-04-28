@@ -10,9 +10,9 @@ import com.hektorks.exceptionhandling.ResourceNotFoundException;
 import com.hektorks.user.changepassword.exceptions.ChangeUserPasswordCommandException;
 import com.hektorks.user.changepassword.exceptions.InvalidOldPasswordException;
 import com.hektorks.user.common.model.User;
+import com.hektorks.user.common.model.UserPassword;
 import com.hektorks.user.common.passwordencryption.PasswordEncryptionBean;
 import com.hektorks.user.common.repository.UsersRepository;
-import com.hektorks.user.common.model.UserPassword;
 import com.hektorks.user.common.validation.PasswordBusinessValidatorBean;
 import com.hektorks.user.common.validation.PasswordValidationEntity;
 import com.hektorks.user.getuserbyid.GetUserByIdCommandBean;
@@ -29,11 +29,11 @@ class ChangeUserPasswordCommandBeanImpl implements ChangeUserPasswordCommandBean
   private final PasswordBusinessValidatorBean passwordBusinessValidatorBean;
 
   @Override
-  public Void execute(ChangeUserPasswordRequest changeUserPasswordRequest) {
+  public Void execute(ChangeUserPasswordRequest changeUserPasswordRequest, Integer userId) {
     try {
-      User currentUser = getUserByIdCommandBean.execute(changeUserPasswordRequest.getUserId());
+      User currentUser = getUserByIdCommandBean.execute(userId);
       if (currentUser == null) {
-        log.info("User with id [{}] not found.", changeUserPasswordRequest.getUserId());
+        log.info("User with id [{}] not found.", userId);
         throw new ResourceNotFoundException();
       }
       passwordBusinessValidatorBean.validate(new PasswordValidationEntity(
@@ -50,10 +50,9 @@ class ChangeUserPasswordCommandBeanImpl implements ChangeUserPasswordCommandBean
         throw new InvalidOldPasswordException();
       }
 
-      usersRepository.updateUserPassword(new UserPassword(
-          changeUserPasswordRequest.getUserId(),
-          passwordEncryptionBean.encrypt(changeUserPasswordRequest.getNewPassword())
-      ));
+      usersRepository.updateUserPassword(
+          new UserPassword(userId, passwordEncryptionBean.encrypt(changeUserPasswordRequest.getNewPassword()))
+      );
       return null;
     } catch (ResourceNotFoundException exception) {
       throw exception;

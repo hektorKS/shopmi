@@ -28,39 +28,19 @@ class CreateUserRequestValidatorBeanImpl implements CreateUserRequestValidatorBe
 
   @Override
   public void validate(CreateUserRequest createUserRequest) {
-    firstNameValidatorBean.isApplicable(createUserRequest.getUsername());
     firstNameValidatorBean.validate(createUserRequest.getFirstName());
     lastNameValidatorBean.validate(createUserRequest.getLastName());
     usernameValidatorBean.validate(createUserRequest.getUsername());
-    emailValidatorBean.validate(createUserRequest.getEmail());
-    validatePassword(createUserRequest);
-    validatePhoneNumber(createUserRequest.getPhoneNumber());
-    validateCountryCode(createUserRequest.getCountryCode());
-  }
-
-  private void validatePassword(CreateUserRequest createUserRequest) {
-    PasswordValidationEntity passwordValidationEntity = new PasswordValidationEntity(
+    passwordValidatorBean.validate(new PasswordValidationEntity(
         createUserRequest.getPassword(),
         createUserRequest.getFirstName(),
         createUserRequest.getLastName(),
         createUserRequest.getUsername(),
         createUserRequest.getEmail(),
         createUserRequest.getPhoneNumber()
-    );
-    if (passwordValidatorBean.isApplicable(passwordValidationEntity)) {
-      passwordValidatorBean.validate(passwordValidationEntity);
-    }
-  }
-
-  private void validatePhoneNumber(String phoneNumber) {
-    if (phoneNumberValidatorBean.isApplicable(phoneNumber)) {
-      phoneNumberValidatorBean.validate(phoneNumber);
-    }
-  }
-
-  private void validateCountryCode(String countryCode) {
-    if (countryCodeValidatorBean.isApplicable(countryCode)) {
-      countryCodeValidatorBean.validate(countryCode);
-    }
+    ));
+    emailValidatorBean.validate(createUserRequest.getEmail());
+    phoneNumberValidatorBean.validate(createUserRequest.getPhoneNumber());
+    countryCodeValidatorBean.validate(createUserRequest.getCountryCode());
   }
 }

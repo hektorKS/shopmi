@@ -3,6 +3,12 @@
     "security": {
       "jwtSecret": "bfd9067872874c9c82039df69d8a82604ea5789abb22495c98fe4724b1d3298f",
       "jwtExpirationSeconds": 300
+    },
+    "dashboard-proxy": {
+      "http": {
+        "connectTimeoutMilliseconds": 400,
+        "readTimeoutMilliseconds": 300
+      }
     }
   }
 }

@@ -5,10 +5,8 @@
 
 package com.hektorks.dashboard.usernameavailability;
 
-import com.hektorks.dashboard.common.CommandBean;
 import com.hektorks.dashboard.common.model.UsernameAvailability;
 
-interface UsernameAvailabilityCommandBean extends CommandBean<UsernameAvailability, UsernameAvailabilityRequest> {
-  @Override
+interface UsernameAvailabilityCommandBean {
   UsernameAvailability execute(UsernameAvailabilityRequest createUserRequest);
 }

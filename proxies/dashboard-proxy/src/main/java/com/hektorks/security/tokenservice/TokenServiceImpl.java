@@ -11,12 +11,15 @@ import com.hektorks.consul.config.SecurityConfig;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 
 import java.time.Instant;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Optional;
 
+import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
 
 @AllArgsConstructor
@@ -36,10 +39,12 @@ class TokenServiceImpl implements TokenService {
 
   @Override
   public String createToken(Integer userId) {
+    byte[] keyBytes = Base64.getDecoder().decode(securityConfig.getJwtSecret());
+    SecretKey key = Keys.hmacShaKeyFor(keyBytes);
     return Jwts.builder()
         .setExpiration(newExpirationTime())
         .claim(USER_ID, userId)
-        .signWith(SignatureAlgorithm.HS256, securityConfig.getJwtSecret())
+        .signWith(key, SignatureAlgorithm.HS256)
         .compact();
   }
 
@@ -69,5 +74,4 @@ class TokenServiceImpl implements TokenService {
   private Date newExpirationTime() {
     return new Date(Instant.now().toEpochMilli() + SECONDS.toMillis(securityConfig.getJwtExpirationSeconds()));
   }
-
 }

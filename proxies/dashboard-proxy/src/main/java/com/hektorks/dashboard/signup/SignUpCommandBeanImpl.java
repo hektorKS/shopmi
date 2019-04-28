@@ -23,14 +23,18 @@ class SignUpCommandBeanImpl implements SignUpCommandBean {
   private final UserService userService;
 
   @Override
-  public UserToken execute(SignUpRequest signUpRequest) {
+  public UserToken execute(SignUpRequest signUpRequest, boolean signIn) {
     try {
       CreateUserDto response = userService.createUser(signUpRequest);
-      return new UserToken(response.getUserId(), tokenService.createToken(response.getUserId()));
+      String token = null;
+      if (signIn) {
+        token = tokenService.createToken(response.getUserId());
+      }
+      return new UserToken(response.getUserId(), token);
     } catch (BusinessValidationException | RequestValidationException exception) {
       throw exception;
     } catch (Exception exception) {
-      log.warn("User sign up failed", exception);
+      log.warn("User sign-up failed", exception);
       throw new SignUpCommandException(exception);
     }
   }
