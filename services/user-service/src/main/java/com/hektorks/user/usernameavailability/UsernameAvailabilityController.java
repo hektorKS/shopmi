@@ -5,8 +5,7 @@
 
 package com.hektorks.user.usernameavailability;
 
-import com.hektorks.exceptionhandling.RequestValidationErrors;
-import com.hektorks.exceptionhandling.RequestValidationException;
+import com.hektorks.user.common.VerifiableController;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/v1")
 @AllArgsConstructor
-class UsernameAvailabilityController {
+class UsernameAvailabilityController extends VerifiableController {
 
   private final UsernameAvailabilityCommandBean usernameAvailabilityCommandBean;
 
@@ -31,9 +30,7 @@ class UsernameAvailabilityController {
       @Valid @RequestBody UsernameAvailabilityRequest usernameAvailabilityRequest,
       Errors errors
   ) {
-    if (errors.hasErrors()) {
-      throw new RequestValidationException(RequestValidationErrors.fromContextErrors(errors));
-    }
+    handleErrors(errors);
     String username = usernameAvailabilityRequest.getUsername();
     boolean isAvailable = usernameAvailabilityCommandBean.execute(username);
     return ResponseEntity.ok(UsernameAvailabilityResponse.create(username, isAvailable));

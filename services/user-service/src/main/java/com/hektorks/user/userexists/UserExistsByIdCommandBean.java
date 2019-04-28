@@ -5,6 +5,6 @@
 
 package com.hektorks.user.userexists;
 
-public interface UserExistsByEmailCommandBean {
-  Boolean execute(String email);
+public interface UserExistsByIdCommandBean {
+  Boolean execute(Integer userId);
 }

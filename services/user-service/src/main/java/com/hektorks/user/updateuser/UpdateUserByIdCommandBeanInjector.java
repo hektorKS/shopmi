@@ -9,7 +9,7 @@ import com.hektorks.user.common.repository.UsersRepository;
 import com.hektorks.user.getuserbyid.GetUserByIdCommandBean;
 import com.hektorks.user.userexists.UserExistsByEmailCommandBean;
 import com.hektorks.user.userexists.UserExistsByUsernameCommandBean;
-import com.hektorks.user.userexists.UserExistsCommandBean;
+import com.hektorks.user.userexists.UserExistsByIdCommandBean;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +22,7 @@ class UpdateUserByIdCommandBeanInjector {
   private final UserExistsByEmailCommandBean userExistsByEmailCommandBean;
   private final GetUserByIdCommandBean getUserByIdCommandBean;
   private final UpdateUserRequestValidatorBean updateUserRequestValidatorBean;
-  private final UserExistsCommandBean userExistsCommandBean;
+  private final UserExistsByIdCommandBean userExistsByIdCommandBean;
   private final UsersRepository usersRepository;
 
   @Bean
@@ -32,7 +32,7 @@ class UpdateUserByIdCommandBeanInjector {
         userExistsByEmailCommandBean,
         getUserByIdCommandBean,
         updateUserRequestValidatorBean,
-        userExistsCommandBean,
+        userExistsByIdCommandBean,
         usersRepository
     );
   }

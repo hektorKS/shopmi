@@ -19,7 +19,7 @@ public class BusinessValidationExceptionMapper {
   private static final String FIELD = "field";
   private static final String MESSAGE = "message";
 
-  public static Map<String, Object> toMap(BusinessValidationException businessValidationException) {
+  static Map<String, Object> toMap(BusinessValidationException businessValidationException) {
     Map<String, Object> result = new HashMap<>();
     result.put(STATUS, businessValidationException.getStatus());
     result.put(FIELD, businessValidationException.getField());

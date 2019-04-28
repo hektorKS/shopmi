@@ -8,15 +8,15 @@ package com.hektorks.user.updateuser;
 import com.hektorks.exceptionhandling.BusinessValidationException;
 import com.hektorks.exceptionhandling.ResourceNotFoundException;
 import com.hektorks.user.common.model.User;
-import com.hektorks.user.common.repository.UsersRepository;
 import com.hektorks.user.common.model.UserData;
+import com.hektorks.user.common.repository.UsersRepository;
 import com.hektorks.user.createuser.exceptions.EmailAlreadyUsedException;
 import com.hektorks.user.createuser.exceptions.UsernameExistsException;
 import com.hektorks.user.getuserbyid.GetUserByIdCommandBean;
 import com.hektorks.user.updateuser.exceptions.UpdateUserCommandException;
 import com.hektorks.user.userexists.UserExistsByEmailCommandBean;
+import com.hektorks.user.userexists.UserExistsByIdCommandBean;
 import com.hektorks.user.userexists.UserExistsByUsernameCommandBean;
-import com.hektorks.user.userexists.UserExistsCommandBean;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,25 +28,23 @@ class UpdateUserByIdCommandBeanImpl implements UpdateUserByIdCommandBean {
   private final UserExistsByEmailCommandBean userExistsByEmailCommandBean;
   private final GetUserByIdCommandBean getUserByIdCommandBean;
   private final UpdateUserRequestValidatorBean updateUserRequestValidatorBean;
-  private final UserExistsCommandBean userExistsCommandBean;
+  private final UserExistsByIdCommandBean userExistsByIdCommandBean;
   private final UsersRepository usersRepository;
 
   @Override
-  public Void execute(UpdateUserRequest updateUserRequest) {
+  public Void execute(UpdateUserRequest updateUserRequest, Integer userId) {
     try {
+      if (!updateUserRequest.isNotEmpty()) {
+        return null;
+      }
       updateUserRequestValidatorBean.validate(updateUserRequest);
 
-      if (!userExistsCommandBean.execute(updateUserRequest.getUserId())) {
-        log.info("User with id [{}] not found.", updateUserRequest.getUserId());
+      if (!userExistsByIdCommandBean.execute(userId)) {
+        log.info("User with id [{}] not found.", userId);
         throw new ResourceNotFoundException();
       }
 
-      if (!updateUserRequest.isNotEmpty()) {
-        log.info("Update not needed for user [{}].", updateUserRequest.getUserId());
-        return null;
-      }
-
-      User currentUser = getUserByIdCommandBean.execute(updateUserRequest.getUserId());
+      User currentUser = getUserByIdCommandBean.execute(userId);
       String username = updateUserRequest.getUsername();
       String currentUsername = currentUser.getUsername();
       boolean usernameChanged = username != null && !currentUsername.equals(username);
@@ -64,7 +62,7 @@ class UpdateUserByIdCommandBeanImpl implements UpdateUserByIdCommandBean {
       }
 
       usersRepository.updateUserData(new UserData(
-          updateUserRequest.getUserId(),
+          userId,
           updateUserRequest.getFirstName(),
           updateUserRequest.getLastName(),
           updateUserRequest.getUsername(),

@@ -5,8 +5,7 @@
 
 package com.hektorks.user.userauthentication;
 
-import com.hektorks.exceptionhandling.RequestValidationErrors;
-import com.hektorks.exceptionhandling.RequestValidationException;
+import com.hektorks.user.common.VerifiableController;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -21,7 +20,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/v1")
 @AllArgsConstructor
-class UserAuthenticationController {
+class UserAuthenticationController extends VerifiableController {
 
   private final UserAuthenticationCommandBean userAuthenticationCommandBean;
 
@@ -30,9 +29,7 @@ class UserAuthenticationController {
       @Valid @RequestBody UserAuthenticationRequest userAuthenticationRequest,
       Errors errors
   ) {
-    if (errors.hasErrors()) {
-      throw new RequestValidationException(RequestValidationErrors.fromContextErrors(errors));
-    }
+    handleErrors(errors);
     Integer userId = userAuthenticationCommandBean.execute(userAuthenticationRequest);
     return ResponseEntity.ok(UserAuthenticationResponse.create(userId));
   }

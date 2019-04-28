@@ -5,9 +5,6 @@
 
 package com.hektorks.user.userauthentication;
 
-import com.hektorks.user.common.CommandBean;
-
-interface UserAuthenticationCommandBean extends CommandBean<Integer, UserAuthenticationRequest> {
-  @Override
+interface UserAuthenticationCommandBean {
   Integer execute(UserAuthenticationRequest userAuthenticationRequest);
 }

@@ -5,9 +5,6 @@
 
 package com.hektorks.user.usernameavailability;
 
-import com.hektorks.user.common.CommandBean;
-
-public interface UsernameAvailabilityCommandBean extends CommandBean<Boolean, String> {
-  @Override
+public interface UsernameAvailabilityCommandBean {
   Boolean execute(String username);
 }

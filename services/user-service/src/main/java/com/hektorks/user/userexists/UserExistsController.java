@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 class UserExistsController {
 
-  private final UserExistsCommandBean userExistsCommandBean;
+  private final UserExistsByIdCommandBean userExistsByIdCommandBean;
 
   @RequestMapping(value = "/user/{userId}", method = RequestMethod.HEAD)
   ResponseEntity userExists(@PathVariable Integer userId) {
-    if (userExistsCommandBean.execute(userId)) {
+    if (userExistsByIdCommandBean.execute(userId)) {
       return ResponseEntity.ok().build();
     } else {
       return ResponseEntity.notFound().build();

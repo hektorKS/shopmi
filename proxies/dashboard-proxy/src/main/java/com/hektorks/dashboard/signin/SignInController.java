@@ -5,8 +5,7 @@
 
 package com.hektorks.dashboard.signin;
 
-import com.hektorks.exceptionhandling.RequestValidationErrors;
-import com.hektorks.exceptionhandling.RequestValidationException;
+import com.hektorks.dashboard.common.VerifiableController;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -21,15 +20,13 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/v1")
 @AllArgsConstructor
-class SignInController {
+class SignInController extends VerifiableController {
 
   private final SignInCommandBean signInCommandBean;
 
   @PostMapping("/user/sign-in")
   public ResponseEntity createUser(@Valid @RequestBody SignInRequest signInRequest, Errors errors) {
-    if (errors.hasErrors()) {
-      throw new RequestValidationException(RequestValidationErrors.fromContextErrors(errors));
-    }
+    handleErrors(errors);
     SignInResponse signInResponse = SignInResponse.create(signInCommandBean.execute(signInRequest));
     return ResponseEntity.ok(signInResponse);
   }

@@ -5,9 +5,6 @@
 
 package com.hektorks.user.userexists;
 
-import com.hektorks.user.common.CommandBean;
-
-public interface UserExistsByUsernameCommandBean extends CommandBean<Boolean, String> {
-  @Override
-  Boolean execute(String data);
+public interface UserExistsByUsernameCommandBean {
+  Boolean execute(String username);
 }

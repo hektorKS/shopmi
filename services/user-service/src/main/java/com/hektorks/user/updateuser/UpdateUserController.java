@@ -22,8 +22,7 @@ class UpdateUserController {
 
   @PatchMapping("/user/{userId}")
   ResponseEntity updateUser(@PathVariable Integer userId, @RequestBody UpdateUserRequest updateUserRequest) {
-    updateUserRequest.setUserId(userId);
-    updateUserByIdCommandBean.execute(updateUserRequest);
+    updateUserByIdCommandBean.execute(updateUserRequest, userId);
     return ResponseEntity.noContent().build();
   }
 }

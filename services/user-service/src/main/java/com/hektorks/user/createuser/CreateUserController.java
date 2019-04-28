@@ -5,8 +5,7 @@
 
 package com.hektorks.user.createuser;
 
-import com.hektorks.exceptionhandling.RequestValidationErrors;
-import com.hektorks.exceptionhandling.RequestValidationException;
+import com.hektorks.user.common.VerifiableController;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -21,15 +20,13 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/v1")
 @AllArgsConstructor
-class CreateUserController {
+class CreateUserController extends VerifiableController {
 
   private final CreateUserCommandBean createUserCommandBean;
 
   @PostMapping("/user")
   public ResponseEntity createUser(@Valid @RequestBody CreateUserRequest createUserRequest, Errors errors) {
-    if (errors.hasErrors()) {
-      throw new RequestValidationException(RequestValidationErrors.fromContextErrors(errors));
-    }
+    handleErrors(errors);
     CreateUserResponse createUserResponse = CreateUserResponse.create(createUserCommandBean.execute(createUserRequest));
     return ResponseEntity.ok(createUserResponse);
   }

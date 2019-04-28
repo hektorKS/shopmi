@@ -5,8 +5,7 @@
 
 package com.hektorks.user.changepassword;
 
-import com.hektorks.exceptionhandling.RequestValidationErrors;
-import com.hektorks.exceptionhandling.RequestValidationException;
+import com.hektorks.user.common.VerifiableController;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -22,7 +21,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/v1")
 @AllArgsConstructor
-class ChangeUserPasswordController {
+class ChangeUserPasswordController extends VerifiableController {
 
   private final ChangeUserPasswordCommandBean changeUserPasswordCommandBean;
 
@@ -32,11 +31,8 @@ class ChangeUserPasswordController {
       @Valid @RequestBody ChangeUserPasswordRequest changeUserPasswordRequest,
       Errors errors
   ) {
-    if (errors.hasErrors()) {
-      throw new RequestValidationException(RequestValidationErrors.fromContextErrors(errors));
-    }
-    changeUserPasswordRequest.setUserId(userId);
-    changeUserPasswordCommandBean.execute(changeUserPasswordRequest);
+    handleErrors(errors);
+    changeUserPasswordCommandBean.execute(changeUserPasswordRequest, userId);
     return ResponseEntity.noContent().build();
   }
 }
