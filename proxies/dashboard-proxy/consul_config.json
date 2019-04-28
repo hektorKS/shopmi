@@ -6,8 +6,8 @@
     },
     "dashboard-proxy": {
       "http": {
-        "connectTimeout": 400,
-        "readTimeout": 300
+        "connectTimeoutMilliseconds": 400,
+        "readTimeoutMilliseconds": 300
       }
     }
   }

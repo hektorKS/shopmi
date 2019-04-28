@@ -15,6 +15,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "dashboard-proxy.http")
 public class HttpConfig {
-  private Integer connectTimeout;
-  private Integer readTimeout;
+  private Integer connectTimeoutMilliseconds;
+  private Integer readTimeoutMilliseconds;
 }

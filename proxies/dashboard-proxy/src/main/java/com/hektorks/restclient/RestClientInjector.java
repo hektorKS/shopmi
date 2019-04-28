@@ -24,8 +24,8 @@ class RestClientInjector {
   @Bean
   RestTemplate getRestTemplate() {
     return new RestTemplateBuilder()
-        .setConnectTimeout(Duration.of(httpConfig.getConnectTimeout(), ChronoUnit.MILLIS))
-        .setReadTimeout(Duration.of(httpConfig.getReadTimeout(), ChronoUnit.MILLIS))
+        .setConnectTimeout(Duration.of(httpConfig.getConnectTimeoutMilliseconds(), ChronoUnit.MILLIS))
+        .setReadTimeout(Duration.of(httpConfig.getReadTimeoutMilliseconds(), ChronoUnit.MILLIS))
         .errorHandler(getRestClientErrorHandler())
         .build();
   }

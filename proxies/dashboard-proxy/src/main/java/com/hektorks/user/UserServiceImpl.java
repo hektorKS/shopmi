@@ -53,7 +53,7 @@ class UserServiceImpl implements UserService {
       ResponseEntity<String> responseEntity = restTemplate.postForEntity(serviceURI, signInRequest, String.class);
       return UserAuthenticationDtoMapper.fromJson(responseEntity.getBody());
     } catch (ServiceUnavailableException exception) {
-      log.warn("Communication with user service failed.", exception);
+      log.warn("Communication with user service failed.");
       throw new UserServiceException(exception);
     }
   }
@@ -67,7 +67,7 @@ class UserServiceImpl implements UserService {
       ResponseEntity<String> responseEntity = restTemplate.postForEntity(serviceURI, usernameAvailabilityRequest, String.class);
       return UsernameAvailabilityDtoMapper.fromJson(responseEntity.getBody());
     } catch (ServiceUnavailableException exception) {
-      log.warn("Communication with user service failed.", exception);
+      log.warn("Communication with user service failed.");
       throw new UserServiceException(exception);
     }
   }
@@ -85,7 +85,7 @@ class UserServiceImpl implements UserService {
       );
       return CreateUserDtoMapper.fromJson(responseEntity.getBody());
     } catch (ServiceUnavailableException exception) {
-      log.warn("Communication with user service failed.", exception);
+      log.warn("Communication with user service failed.");
       throw new UserServiceException(exception);
     }
   }
@@ -100,7 +100,7 @@ class UserServiceImpl implements UserService {
       ResponseEntity<String> responseEntity = restTemplate.getForEntity(serviceURI, String.class);
       return GetUserDtoMapper.fromJson(responseEntity.getBody());
     } catch (ServiceUnavailableException exception) {
-      log.warn("Communication with user service failed.", exception);
+      log.warn("Communication with user service failed.");
       throw new UserServiceException(exception);
     }
   }
